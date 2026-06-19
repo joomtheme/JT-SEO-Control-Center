@@ -1,15 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <changelogs>
     <changelog>
         <element>pkg_jtseo</element>
         <type>package</type>
-        <version>1.0.43</version>
-        <note>
-            <item>Release Candidate final polish for JT SEO Control Center.</item>
-            <item>Added Joomla update server metadata to the package manifest.</item>
-            <item>Includes tabbed dashboard, health checks, article SEO scoring, live article SEO score, SEO audit, bulk meta manager, CSV import/export, sitemap generation, structured data preview, redirect management and 404 logging.</item>
-            <item>Includes Support card and Quick Start checklist for production use.</item>
-            <item>JED checker cleanup and schema version alignment.</item>
-        </note>
+        <version>1.0.53</version>
+        <security>
+            <item>No security fixes.</item>
+        </security>
+        <fix>
+            <item>Added GPL license copies to package and child extension archives.</item>
+            <item>Cleaned the SQL update chain to avoid duplicate-column errors on mixed upgrade paths.</item>
+            <item>Added safe component installer schema alignment for redirect and 404 log tables.</item>
+            <item>Moved Structured Data dashboard mapping messages to language strings.</item>
+            <item>Removed deprecated asset fallback calls from the content plugin.</item>
+            <item>Updated README version and privacy note.</item>
+            <item>Clarified BreadcrumbList mapping copy for Joomla core Breadcrumbs module and duplicate JSON-LD checks.</item>
+        </fix>
     </changelog>
 </changelogs>
