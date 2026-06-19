@@ -1,1 +1,15 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<changelogs>
+    <changelog>
+        <element>pkg_jtseo</element>
+        <type>package</type>
+        <version>1.0.43</version>
+        <note>
+            <item>Release Candidate final polish for JT SEO Control Center.</item>
+            <item>Added Joomla update server metadata to the package manifest.</item>
+            <item>Includes tabbed dashboard, health checks, article SEO scoring, live article SEO score, SEO audit, bulk meta manager, CSV import/export, sitemap generation, structured data preview, redirect management and 404 logging.</item>
+            <item>Includes Support card and Quick Start checklist for production use.</item>
+            <item>JED checker cleanup and schema version alignment.</item>
+        </note>
+    </changelog>
+</changelogs>
