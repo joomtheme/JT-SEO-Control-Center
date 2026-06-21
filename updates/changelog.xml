@@ -15,6 +15,7 @@
             <item>Removed deprecated asset fallback calls from the content plugin.</item>
             <item>Updated README version and privacy note.</item>
             <item>Clarified BreadcrumbList mapping copy for Joomla core Breadcrumbs module and duplicate JSON-LD checks.</item>
+            <item>Added optional Support / Community dashboard card with configurable JED review, GitHub star and support development links.</item>
         </fix>
     </changelog>
 </changelogs>
