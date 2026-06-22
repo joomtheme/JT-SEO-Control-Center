@@ -6,10 +6,10 @@
         <description>Manage Joomla SEO from one dashboard: article SEO fields, audit scores, bulk metadata, XML sitemaps, structured data preview, redirects and 404 tracking.</description>
         <element>pkg_jtseo</element>
         <type>package</type>
-        <version>1.0.56</version>
+        <version>1.0.57</version>
         <infourl title="JT SEO Control Center">https://github.com/joomtheme/JT-SEO-Control-Center</infourl>
         <downloads>
-            <downloadurl type="full" format="zip">https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v1.0.56/pkg_jtseo_v1.0.56.zip</downloadurl>
+            <downloadurl type="full" format="zip">https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v1.0.57/pkg_jtseo_v1.0.57.zip</downloadurl>
         </downloads>
         <tags>
             <tag>stable</tag>
@@ -18,7 +18,7 @@
         <maintainerurl>https://joomtheme.com</maintainerurl>
         <targetplatform name="joomla" version="6.*"/>
         <php_minimum>8.3.0</php_minimum>
-        <sha256>c568a9275defdd706bad7a4a77da1b494019947012a4559c3d6966024b0085e4</sha256>
+        <sha256>57023ab4e4bb30deb0835c4a91f071f5f6f26d4ac6e8731caa594e27cc1f9747</sha256>
         <changelogurl>https://raw.githubusercontent.com/joomtheme/JT-SEO-Control-Center/main/updates/changelog.xml</changelogurl>
     </update>
 </updates>
