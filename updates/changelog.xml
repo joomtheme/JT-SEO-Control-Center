@@ -4,7 +4,7 @@
     <changelog>
         <element>pkg_jtseo</element>
         <type>package</type>
-        <version>1.0.56</version>
+        <version>1.0.57</version>
 
         <security>
             <item>No security fixes.</item>
@@ -15,7 +15,7 @@
             <item>Added a default Needs attention filter for low-score articles.</item>
             <item>Added expandable advanced metadata fields in the Bulk Meta Manager.</item>
             <item>Added privacy-friendly 404 logging options for query strings, referrers and user agents.</item>
-            <item>Added database update marker for version 1.0.56.</item>
+            <item>Added database update marker for version 1.0.57.</item>
         </addition>
 
         <change>
@@ -23,7 +23,7 @@
             <item>Collapsed CSV Import / Export tools by default to reduce dashboard clutter.</item>
             <item>Changed the Bulk Meta Manager save button text to better describe the action.</item>
             <item>Improved responsive behavior for search, filter and reset controls.</item>
-            <item>Updated package, component and plugin versions to 1.0.56.</item>
+            <item>Updated package, component and plugin versions to 1.0.57.</item>
             <item>Updated README documentation for the public stable release.</item>
             <item>Improved English and Turkish language strings.</item>
         </change>
@@ -39,7 +39,7 @@
     <changelog>
         <element>pkg_jtseo</element>
         <type>package</type>
-        <version>1.0.53</version>
+        <version>1.0.57</version>
 
         <security>
             <item>No security fixes.</item>
