@@ -1,12 +1,50 @@
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <changelogs>
     <changelog>
         <element>pkg_jtseo</element>
         <type>package</type>
-        <version>1.0.53</version>
+        <version>1.0.56</version>
+
         <security>
             <item>No security fixes.</item>
         </security>
+
+        <addition>
+            <item>Added pagination options to the Bulk Meta Manager.</item>
+            <item>Added a default Needs attention filter for low-score articles.</item>
+            <item>Added expandable advanced metadata fields in the Bulk Meta Manager.</item>
+            <item>Added privacy-friendly 404 logging options for query strings, referrers and user agents.</item>
+            <item>Added database update marker for version 1.0.56.</item>
+        </addition>
+
+        <change>
+            <item>Improved the Bulk Meta Manager layout for a cleaner editing workflow.</item>
+            <item>Collapsed CSV Import / Export tools by default to reduce dashboard clutter.</item>
+            <item>Changed the Bulk Meta Manager save button text to better describe the action.</item>
+            <item>Improved responsive behavior for search, filter and reset controls.</item>
+            <item>Updated package, component and plugin versions to 1.0.56.</item>
+            <item>Updated README documentation for the public stable release.</item>
+            <item>Improved English and Turkish language strings.</item>
+        </change>
+
+        <fix>
+            <item>Optimized 404 logging to avoid unnecessary database writes on normal frontend page views.</item>
+            <item>Fixed Bulk Meta Manager button wrapping on narrow layouts.</item>
+            <item>Improved dashboard support link handling when optional URLs are empty.</item>
+            <item>Improved package integrity and update metadata consistency.</item>
+        </fix>
+    </changelog>
+
+    <changelog>
+        <element>pkg_jtseo</element>
+        <type>package</type>
+        <version>1.0.53</version>
+
+        <security>
+            <item>No security fixes.</item>
+        </security>
+
         <fix>
             <item>Added GPL license copies to package and child extension archives.</item>
             <item>Cleaned the SQL update chain to avoid duplicate-column errors on mixed upgrade paths.</item>
@@ -15,7 +53,8 @@
             <item>Removed deprecated asset fallback calls from the content plugin.</item>
             <item>Updated README version and privacy note.</item>
             <item>Clarified BreadcrumbList mapping copy for Joomla core Breadcrumbs module and duplicate JSON-LD checks.</item>
-            <item>Added optional Support / Community dashboard card with configurable JED review, GitHub star and support development links.</item>
+            <item>Added optional Support / Community dashboard card with configurable project, GitHub and support links.</item>
         </fix>
     </changelog>
 </changelogs>
+```
