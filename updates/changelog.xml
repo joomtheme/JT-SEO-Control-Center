@@ -5,8 +5,7 @@
         <element>pkg_jtseo</element>
         <type>package</type>
         <version>1.0.57</version>
-
-```
+        
     <security>
         <item>No security fixes.</item>
     </security>
@@ -74,5 +73,4 @@
         <item>Added optional Support / Community dashboard card with configurable project, GitHub and support links.</item>
     </fix>
 </changelog>
-
 </changelogs>
