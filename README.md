@@ -772,40 +772,6 @@ Then return to:
 Components → JT SEO Control Center → System Status
 ```
 
----
-
-## Recommended JED Test Checklist
-
-Before submitting to the Joomla Extension Directory, test:
-
-* Fresh installation on Joomla 6
-* Upgrade installation over the previous version
-* Uninstall behavior
-* Component dashboard access
-* System plugin enabled state
-* Content plugin enabled state
-* Article edit form JT SEO fields
-* Homepage metadata output
-* Article metadata output
-* Canonical URL output
-* XML sitemap generation
-* Physical `sitemap.xml` generation
-* 404 logging
-* 404 query/referrer/user-agent logging options
-* Redirect creation
-* Redirect deletion
-* Bulk Meta Manager filters
-* Bulk Meta Manager pagination
-* CSV export
-* CSV preview import
-* CSV live import
-* English language UI
-* Turkish language UI
-* Joomla administrator template compatibility
-* JED Checker result
-
----
-
 ## Version 1.0.56
 
 ### Release Type
