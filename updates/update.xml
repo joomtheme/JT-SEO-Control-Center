@@ -7,15 +7,12 @@
         <type>package</type>
         <version>1.0.57</version>
         <infourl title="JT SEO Control Center">https://github.com/joomtheme/JT-SEO-Control-Center</infourl>
-
         <downloads>
             <downloadurl type="full" format="zip">https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v1.0.57/pkg_jtseo_v1.0.57-stable.zip</downloadurl>
         </downloads>
-
         <tags>
             <tag>stable</tag>
         </tags>
-
         <maintainer>JoomTheme</maintainer>
         <maintainerurl>https://joomtheme.com</maintainerurl>
         <targetplatform name="joomla" version="6.*"/>
