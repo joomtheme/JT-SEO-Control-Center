@@ -1,12 +1,35 @@
 # JT SEO Control Center
 
-**JT SEO Control Center** is a Joomla SEO management package for Joomla 6. It helps site owners manage homepage metadata, article SEO fields, Open Graph and Twitter Card metadata, canonical URLs, XML sitemaps, SEO audits, bulk metadata editing, CSV import/export, 404 tracking and redirect rules from one Joomla administrator dashboard.
+**JT SEO Control Center** is a Joomla SEO management package for Joomla 6. It helps site owners, administrators, and developers audit SEO issues, manage article metadata, generate XML sitemaps, track 404 errors, create redirects, preview structured data mappings, and improve Joomla SEO from one clean administrator dashboard.
+
+A clean SEO control center for Joomla: audit articles, manage metadata, generate XML sitemaps, track 404 errors, and create redirects from one dashboard.
+
+Instead of managing common SEO tasks across multiple screens or extensions, JT SEO Control Center brings essential Joomla SEO workflows into a single control center.
 
 The package includes:
 
 * `com_jtseo` — JT SEO Control Center component
 * `plg_system_jtseo` — frontend metadata, canonical, sitemap, redirect and 404 handling
 * `plg_content_jtseo` — article edit form SEO fields and live SEO score
+
+---
+
+## Key Features
+
+* SEO dashboard for Joomla administrators
+* Article SEO audit and scoring
+* Bulk metadata editing with pagination and filters
+* CSV import and export for SEO fields
+* Homepage metadata management
+* Article SEO title and description overrides
+* Canonical URL management
+* Open Graph and Twitter Card metadata
+* XML sitemap generation
+* Optional physical `sitemap.xml` creation
+* 404 tracking with privacy-friendly logging options
+* Redirect manager with 301, 302, 307, 308 and 410 support
+* Structured Data preview for common JSON-LD mappings
+* English and Turkish language support
 
 ---
 
@@ -27,7 +50,7 @@ JT SEO Control Center is distributed as a Joomla package extension.
 Install this file through Joomla:
 
 ```text
-pkg_jtseo_v1.0.53.zip
+pkg_jtseo_v1.0.56-stable.zip
 ```
 
 The package installs the following child extensions:
@@ -63,6 +86,8 @@ The dashboard includes:
 * Structured Data preview
 * Redirect and 404 manager
 * System health checks
+
+The dashboard is designed to help site owners quickly understand what needs attention and where to take action.
 
 ---
 
@@ -156,16 +181,33 @@ The audit table includes severity, issue type and fix suggestions.
 
 The Bulk Meta Manager allows administrators to edit SEO override fields for multiple Joomla articles from one dashboard section.
 
-Editable fields include:
+The default view focuses on articles that need attention, so healthy articles do not clutter the screen.
+
+Bulk Meta Manager features include:
+
+* Default **Needs attention** filter
+* Pagination options for 10, 25 or 50 articles
+* Search by article title, alias or metadata
+* Score/status filters
+* Compact default editing layout
+* Expandable advanced fields
+* CSV Import / Export tools in a collapsible panel
+
+Main editable fields:
 
 * SEO title override
 * SEO description override
+
+Advanced editable fields:
+
 * Robots index directive
 * Robots follow directive
 * Canonical URL override
 * Open Graph image override
 
 Bulk saves only update JT SEO article override fields. Joomla article titles and article body content are not changed.
+
+Empty fields do not automatically rewrite Joomla article content. Only supported JT SEO override fields are saved.
 
 ---
 
@@ -313,12 +355,17 @@ When enabled, frontend 404 requests are logged in the dashboard.
 Logged data may include:
 
 * Requested URL
-* Referrer URL
+* Referrer URL, if referrer logging is enabled
+* Query string, if query string logging is enabled
+* User agent, if optional user-agent logging is enabled
 * Last hit date
 * Hit count
-* User agent, if optional user-agent logging is enabled
 
 404 logs help administrators find broken URLs and create redirect rules.
+
+JT SEO Control Center is designed to avoid unnecessary database writes on normal frontend page views. It logs real 404 requests instead of writing temporary records for every successful page request.
+
+For privacy-friendly defaults, optional logging fields such as query strings and user agents should remain disabled unless they are needed for troubleshooting.
 
 ---
 
@@ -364,18 +411,17 @@ If a required plugin is disabled or a database table is missing, the dashboard d
 ## Installation
 
 1. Log in to the Joomla Administrator.
-2. Go to **System**.
-3. Open **Install Extensions**.
-4. Upload the package ZIP file:
+2. Go to **System → Install Extensions**.
+3. Upload the package ZIP file:
 
 ```text
-pkg_jtseo_v1.0.53.zip
+pkg_jtseo_v1.0.56-stable.zip
 ```
 
-5. Wait for Joomla to complete the package installation.
-6. Go to **Components → JT SEO Control Center**.
-7. Open the **System Status** section.
-8. Confirm that the required plugins and database tables are healthy.
+4. Wait for Joomla to complete the package installation.
+5. Go to **Components → JT SEO Control Center**.
+6. Open the **System Status** section.
+7. Confirm that the required plugins and database tables are healthy.
 
 The package attempts to enable the required JT SEO plugins automatically after installation or update.
 
@@ -445,11 +491,13 @@ Recommended editor workflow:
 Recommended bulk workflow:
 
 1. Open **Components → JT SEO Control Center**.
-2. Go to **Article SEO Scores** or **Bulk Meta Manager**.
-3. Filter low-score articles or articles with missing descriptions.
-4. Edit SEO fields directly in the dashboard.
-5. Save bulk metadata.
-6. Recheck the SEO audit.
+2. Go to **Bulk Meta Manager**.
+3. Review the default **Needs attention** list.
+4. Use search, score/status filters or pagination to narrow the article list.
+5. Edit SEO title and SEO description fields directly in the dashboard.
+6. Open **Advanced fields** only when canonical, robots or Open Graph image overrides are needed.
+7. Save changes.
+8. Recheck the SEO audit.
 
 For spreadsheet workflows:
 
@@ -522,17 +570,19 @@ Recommended redirect workflow:
 | Include homepage                        | Adds homepage to sitemap                          |
 | Include Joomla articles                 | Adds published articles                           |
 | Exclude noindex articles                | Removes noindex articles from sitemap             |
-| Exclude component fallback article URLs | Avoids ugly fallback article URLs                 |
+| Exclude component fallback article URLs | Avoids fallback component article URLs            |
 | Generate physical sitemap.xml           | Writes a real sitemap.xml file to the Joomla root |
 | Article limit                           | Maximum number of articles included               |
 
 ### Redirects and 404
 
-| Option           | Description                                              |
-| ---------------- | -------------------------------------------------------- |
-| Enable redirects | Enables frontend redirect rule checks                    |
-| Log 404 requests | Stores frontend 404 requests for review                  |
-| Log user agents  | Optionally stores user-agent strings for troubleshooting |
+| Option            | Description                                              |
+| ----------------- | -------------------------------------------------------- |
+| Enable redirects  | Enables frontend redirect rule checks                    |
+| Log 404 requests  | Stores frontend 404 requests for review                  |
+| Log query strings | Optionally stores query strings for 404 diagnostics      |
+| Log referrers     | Optionally stores referrer URLs for 404 diagnostics      |
+| Log user agents   | Optionally stores user-agent strings for troubleshooting |
 
 ### System Plugin
 
@@ -541,6 +591,14 @@ Recommended redirect workflow:
 | Add Open Graph site name     | Adds `og:site_name` using the Joomla site name |
 | Add generator meta           | Adds a JT SEO generator meta tag               |
 | Remove Joomla generator meta | Removes Joomla default generator meta tag      |
+
+### Support / Community
+
+| Option                  | Description                                                |
+| ----------------------- | ---------------------------------------------------------- |
+| JED listing/profile URL | Optional Joomla Extension Directory listing or profile URL |
+| GitHub repository URL   | Optional GitHub project URL                                |
+| Support website URL     | Optional support or documentation URL                      |
 
 ---
 
@@ -576,13 +634,18 @@ Components → JT SEO Control Center → Options → Permissions
 
 ## Privacy Notice
 
-JT SEO Control Center can store 404 request URLs, referrer URLs and user-agent strings when 404 tracking is enabled.
+JT SEO Control Center can store 404 request URLs, referrer URLs, query strings and user-agent strings when 404 tracking is enabled and the related logging options are active.
 
 This data is used for SEO diagnostics and redirect management.
 
 Site owners should disclose this behavior in their privacy policy where required.
 
-User-agent logging is optional and should remain disabled unless troubleshooting details are needed.
+Recommended privacy-friendly defaults:
+
+* Keep query string logging disabled unless needed.
+* Keep user-agent logging disabled unless troubleshooting.
+* Enable referrer logging only when it is useful for broken-link diagnostics.
+* Review and clear old 404 logs periodically.
 
 ---
 
@@ -659,6 +722,40 @@ Check:
 
 ---
 
+### Bulk Meta Manager does not show all articles
+
+By default, Bulk Meta Manager focuses on articles that need attention.
+
+To view more articles:
+
+1. Change the filter from **Needs attention** to **All articles**.
+2. Increase the page limit to 25 or 50.
+3. Use search to find a specific article.
+
+---
+
+### CSV import skipped rows
+
+Check:
+
+1. `article_id` values were not changed.
+2. Writable column names are correct.
+3. The CSV file uses a valid format.
+4. Preview mode results were reviewed before applying changes.
+
+Writable import columns:
+
+```text
+seo_title
+seo_description
+canonical
+robots_index
+robots_follow
+og_image
+```
+
+---
+
 ### Database schema warning appears
 
 Go to:
@@ -694,38 +791,42 @@ Before submitting to the Joomla Extension Directory, test:
 * XML sitemap generation
 * Physical `sitemap.xml` generation
 * 404 logging
+* 404 query/referrer/user-agent logging options
 * Redirect creation
 * Redirect deletion
+* Bulk Meta Manager filters
+* Bulk Meta Manager pagination
 * CSV export
 * CSV preview import
 * CSV live import
 * English language UI
 * Turkish language UI
 * Joomla administrator template compatibility
-* JEDchecker result
+* JED Checker result
 
 ---
 
-## Version 1.0.53
+## Version 1.0.56
 
 ### Release Type
 
-Joomla 6 and JED readiness maintenance release.
+JED-ready stable release for Joomla 6.
 
 ### Changes
 
-* Improved Joomla 6 compatibility and modern MVC alignment.
-* Added GPL license file to the main package and child extension archives.
-* Improved JED readiness with cleaner package metadata and installation structure.
-* Fixed SQL update handling to prevent duplicate column issues during upgrades.
-* Added safer database migration handling for existing installations.
-* Improved Structured Data dashboard labels and descriptions.
-* Updated BreadcrumbList status text to better reflect Joomla core Breadcrumbs module behavior.
-* Moved remaining hardcoded dashboard strings into language files.
-* Improved English and Turkish language file consistency.
-* Removed deprecated asset-loading fallback from the content plugin.
-* Updated README version information to match the package release.
-* Added privacy note for 404 logging behavior.
+* Improved Bulk Meta Manager user interface.
+* Added default **Needs attention** filter for low-score articles.
+* Added pagination options for Bulk Meta Manager.
+* Collapsed CSV Import / Export tools for a cleaner default view.
+* Moved advanced metadata fields into an expandable section.
+* Improved Bulk Meta Manager button layout and responsive behavior.
+* Optimized 404 logging to avoid unnecessary database writes on normal frontend page views.
+* Added privacy-friendly 404 logging options for query strings, referrers and user agents.
+* Improved JED listing/profile URL handling.
+* Updated package, component and plugin versions to `1.0.56`.
+* Improved Joomla 6 and JED readiness.
+* Improved English and Turkish language strings.
+* Added database update marker for version `1.0.56`.
 * Improved package integrity for Joomla Extension Directory review.
 
 ---
@@ -760,4 +861,16 @@ For documentation, support and updates, visit:
 
 ```text
 https://joomtheme.com
+```
+
+GitHub repository:
+
+```text
+https://github.com/joomtheme/JT-SEO-Control-Center
+```
+
+Joomla Extension Directory profile:
+
+```text
+https://extensions.joomla.org/profile/profile/details/147240/
 ```
