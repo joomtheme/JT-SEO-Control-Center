@@ -50,7 +50,7 @@ JT SEO Control Center is distributed as a Joomla package extension.
 Install this file through Joomla:
 
 ```text
-pkg_jtseo_v1.0.56-stable.zip
+pkg_jtseo_v1.0.57.zip
 ```
 
 The package installs the following child extensions:
@@ -415,7 +415,7 @@ If a required plugin is disabled or a database table is missing, the dashboard d
 3. Upload the package ZIP file:
 
 ```text
-pkg_jtseo_v1.0.56-stable.zip
+pkg_jtseo_v1.0.57.zip
 ```
 
 4. Wait for Joomla to complete the package installation.
@@ -772,7 +772,7 @@ Then return to:
 Components → JT SEO Control Center → System Status
 ```
 
-## Version 1.0.56
+## Version 1.0.57
 
 ### Release Type
 
@@ -789,10 +789,10 @@ JED-ready stable release for Joomla 6.
 * Optimized 404 logging to avoid unnecessary database writes on normal frontend page views.
 * Added privacy-friendly 404 logging options for query strings, referrers and user agents.
 * Improved JED listing/profile URL handling.
-* Updated package, component and plugin versions to `1.0.56`.
+* Updated package, component and plugin versions to `1.0.57`.
 * Improved Joomla 6 and JED readiness.
 * Improved English and Turkish language strings.
-* Added database update marker for version `1.0.56`.
+* Added database update marker for version `1.0.57`.
 * Improved package integrity for Joomla Extension Directory review.
 
 ---
