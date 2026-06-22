@@ -5,6 +5,7 @@
         <description>Manage Joomla SEO from one dashboard: article SEO fields, audit scores, bulk metadata, XML sitemaps, structured data preview, redirects and 404 tracking.</description>
         <element>pkg_jtseo</element>
         <type>package</type>
+        <client>site</client>
         <version>1.0.57</version>
         <infourl title="JT SEO Control Center">https://github.com/joomtheme/JT-SEO-Control-Center</infourl>
         <downloads>
