@@ -772,7 +772,7 @@ Then return to:
 Components → JT SEO Control Center → System Status
 ```
 
-## Version 1.0.57
+## Version 1.0.61
 
 ### Release Type
 
@@ -789,10 +789,10 @@ JED-ready stable release for Joomla 6.
 * Optimized 404 logging to avoid unnecessary database writes on normal frontend page views.
 * Added privacy-friendly 404 logging options for query strings, referrers and user agents.
 * Improved JED listing/profile URL handling.
-* Updated package, component and plugin versions to `1.0.57`.
+* Updated package, component and plugin versions to `1.0.61`.
 * Improved Joomla 6 and JED readiness.
 * Improved English and Turkish language strings.
-* Added database update marker for version `1.0.57`.
+* Added database update marker for version `1.0.61`.
 * Improved package integrity for Joomla Extension Directory review.
 
 ---
