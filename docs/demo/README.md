@@ -29,11 +29,11 @@ The Structured Data tools help configure JSON-LD output for supported Joomla con
 
 ![Structured Data](images/structured-data.png)
 
-## Sitemap
+## Component Options
 
-The Sitemap section provides tools for generating and reviewing sitemap output.
+The Component Options screen allows administrators to configure JT SEO Control Center settings, including redirects, 404 logging, sitemap behavior, structured data and other SEO-related options.
 
-![Sitemap](images/sitemap.png)
+![Component Options](images/component-options.png)
 
 ## Note
 
