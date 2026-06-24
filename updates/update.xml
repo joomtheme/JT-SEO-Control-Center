@@ -18,7 +18,7 @@
         <maintainerurl>https://joomtheme.com</maintainerurl>
         <targetplatform name="joomla" version="6.*" />
         <php_minimum>8.3.0</php_minimum>
-        <sha256>6d0bbed14678ac1771740eb3b1b322e6c86c0c55aa051f1e028449e7e4607b14</sha256>
+        <sha256>5cdb67fa8b2fe5e18545dac55bc895c33a3db79a4127a330983262f19a28ed2d</sha256>
         <changelogurl>https://raw.githubusercontent.com/joomtheme/JT-SEO-Control-Center/main/updates/changelog.xml</changelogurl>
     </update>
 </updates>
