@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<changelog>
+    <element>pkg_jtseo</element>
+    <type>package</type>
+    <version>1.0.61</version>
+
+    <security>
+        <item>No security fixes.</item>
+    </security>
+
+    <fix>
+        <item>Improved 404 logging reliability for Joomla routing edge cases.</item>
+        <item>Fixed misleading dashboard status indicators for the Redirects / 404 section.</item>
+        <item>Replaced the technical 404 log table health-check label with clearer status information.</item>
+        <item>Separated the actual 404 logging status from database table availability checks.</item>
+        <item>Improved detection of modified article URLs that may resolve unexpectedly through Joomla routing.</item>
+        <item>Updated package, component and plugin versions to 1.0.61.</item>
+        <item>Added database update marker for version 1.0.61.</item>
+    </fix>
+
+    <change>
+        <item>Refined the Redirects / 404 dashboard interface for clearer user feedback.</item>
+    </change>
+</changelog>
+
 <changelogs>
     <changelog>
         <element>pkg_jtseo</element>
