@@ -1,8 +1,8 @@
 # JT SEO Control Center
 
-**JT SEO Control Center** is a Joomla SEO management package for Joomla 6. It helps site owners, administrators, and developers audit SEO issues, manage article metadata, generate XML sitemaps, track 404 errors, create redirects, preview structured data mappings, and improve Joomla SEO from one clean administrator dashboard.
+**JT SEO Control Center** is a Joomla SEO management package for Joomla 6. It helps site owners, administrators, and developers audit SEO issues, manage article metadata, generate XML sitemaps, manage multilingual sitemap output, track 404 errors, create redirects, preview structured data mappings, and improve Joomla SEO from one clean administrator dashboard.
 
-A clean SEO control center for Joomla: audit articles, manage metadata, generate XML sitemaps, track 404 errors, and create redirects from one dashboard.
+A clean SEO control center for Joomla: audit articles, manage metadata, generate XML sitemaps, support multilingual sitemap output, track 404 errors, and create redirects from one dashboard.
 
 Instead of managing common SEO tasks across multiple screens or extensions, JT SEO Control Center brings essential Joomla SEO workflows into a single control center.
 
@@ -25,6 +25,8 @@ The package includes:
 * Canonical URL management
 * Open Graph and Twitter Card metadata
 * XML sitemap generation
+* Multilingual XML sitemap support
+* Sitemap index support for multilingual websites
 * Optional physical `sitemap.xml` creation
 * 404 tracking with privacy-friendly logging options
 * Redirect manager with 301, 302, 307, 308 and 410 support
@@ -50,7 +52,7 @@ JT SEO Control Center is distributed as a Joomla package extension.
 Install this file through Joomla:
 
 ```text
-pkg_jtseo_v1.0.62.zip
+pkg_jtseo_v1.0.63.zip
 ```
 
 The package installs the following child extensions:
@@ -80,6 +82,7 @@ The dashboard includes:
 * Article metadata status
 * XML sitemap status
 * Physical `sitemap.xml` status
+* Multilingual sitemap status
 * SEO audit summary
 * Article SEO scores
 * Bulk metadata editor
@@ -293,7 +296,7 @@ Article images are selected in this order:
 
 ### XML Sitemap Generator
 
-JT SEO Control Center can generate an XML sitemap for Joomla sites.
+JT SEO Control Center can generate XML sitemaps for Joomla sites.
 
 Sitemap features:
 
@@ -304,14 +307,65 @@ Sitemap features:
 * Configurable article limit
 * Dynamic XML endpoint
 * Optional physical `sitemap.xml` generation in the Joomla root folder
+* Multilingual sitemap support for Joomla websites using multiple content languages
+* Sitemap index output for multilingual websites
+* Dedicated sitemap output for each published content language
 
-The physical sitemap is recommended for search engines because it can be accessed directly as:
+For standard single-language websites, the sitemap can be accessed as:
 
 ```text
 https://example.com/sitemap.xml
 ```
 
+For multilingual websites, `sitemap.xml` can work as a sitemap index and point to language-specific sitemap files such as:
+
+```text
+https://example.com/sitemap.xml
+https://example.com/sitemap-en.xml
+https://example.com/sitemap-tr.xml
+```
+
+In multilingual mode, article sitemap generation respects Joomla content language values and uses language-aware Joomla routing when building article URLs.
+
 If the Joomla root folder is not writable, physical sitemap generation may fail. The dashboard system status will warn about this.
+
+---
+
+### Multilingual Sitemap Support
+
+JT SEO Control Center supports multilingual Joomla websites with multiple published content languages.
+
+When multilingual sitemap support is enabled, `/sitemap.xml` can act as a sitemap index and link to dedicated sitemap files for each published language.
+
+Example sitemap index output:
+
+```xml
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <sitemap>
+        <loc>https://example.com/sitemap-en.xml</loc>
+    </sitemap>
+    <sitemap>
+        <loc>https://example.com/sitemap-tr.xml</loc>
+    </sitemap>
+</sitemapindex>
+```
+
+Example language sitemap files:
+
+```text
+/sitemap-en.xml
+/sitemap-tr.xml
+```
+
+Each language sitemap is generated from published Joomla articles assigned to the matching content language.
+
+Recommended Joomla multilingual setup:
+
+* Enable the Joomla Language Filter plugin.
+* Publish the required content languages.
+* Assign a home menu item for each site language.
+* Assign articles to the correct content language.
+* Generate the sitemap from JT SEO Control Center.
 
 ---
 
@@ -415,7 +469,7 @@ If a required plugin is disabled or a database table is missing, the dashboard d
 3. Upload the package ZIP file:
 
 ```text
-pkg_jtseo_v1.0.62.zip
+pkg_jtseo_v1.0.63.zip
 ```
 
 4. Wait for Joomla to complete the package installation.
@@ -464,9 +518,10 @@ Recommended first setup:
 7. Enable article images for Open Graph.
 8. Enable article SEO fields.
 9. Enable XML sitemap.
-10. Enable physical `sitemap.xml` generation if the Joomla root folder is writable.
-11. Enable redirects if redirect management is needed.
-12. Enable 404 logging if broken URL tracking is needed.
+10. Enable multilingual sitemap support if the website uses multiple content languages.
+11. Enable physical `sitemap.xml` generation if the Joomla root folder is writable.
+12. Enable redirects if redirect management is needed.
+13. Enable 404 logging if broken URL tracking is needed.
 
 ---
 
@@ -518,16 +573,24 @@ Recommended sitemap workflow:
 3. Enable homepage and article inclusion.
 4. Enable noindex exclusion.
 5. Enable fallback URL exclusion.
-6. Enable physical `sitemap.xml` generation if possible.
-7. Open the dashboard.
-8. Click **Generate sitemap.xml**.
-9. Visit:
+6. Enable multilingual sitemap support if the site uses multiple content languages.
+7. Enable physical `sitemap.xml` generation if possible.
+8. Open the dashboard.
+9. Click **Generate sitemap.xml**.
+10. Visit:
 
 ```text
 https://example.com/sitemap.xml
 ```
 
-10. Submit the sitemap URL to search engine webmaster tools.
+11. Submit the sitemap URL to search engine webmaster tools.
+
+For multilingual websites, also check the language-specific sitemap files listed inside `sitemap.xml`, for example:
+
+```text
+https://example.com/sitemap-en.xml
+https://example.com/sitemap-tr.xml
+```
 
 ---
 
@@ -564,15 +627,16 @@ Recommended redirect workflow:
 
 ### XML Sitemap
 
-| Option                                  | Description                                       |
-| --------------------------------------- | ------------------------------------------------- |
-| Enable XML sitemap                      | Enables sitemap output                            |
-| Include homepage                        | Adds homepage to sitemap                          |
-| Include Joomla articles                 | Adds published articles                           |
-| Exclude noindex articles                | Removes noindex articles from sitemap             |
-| Exclude component fallback article URLs | Avoids fallback component article URLs            |
-| Generate physical sitemap.xml           | Writes a real sitemap.xml file to the Joomla root |
-| Article limit                           | Maximum number of articles included               |
+| Option                                  | Description                                                   |
+| --------------------------------------- | ------------------------------------------------------------- |
+| Enable XML sitemap                      | Enables sitemap output                                        |
+| Include homepage                        | Adds homepage to sitemap                                      |
+| Include Joomla articles                 | Adds published articles                                       |
+| Exclude noindex articles                | Removes noindex articles from sitemap                         |
+| Exclude component fallback article URLs | Avoids fallback component article URLs                        |
+| Enable multilingual sitemap             | Generates a sitemap index and language-specific sitemap files |
+| Generate physical sitemap.xml           | Writes a real sitemap.xml file to the Joomla root             |
+| Article limit                           | Maximum number of articles included                           |
 
 ### Redirects and 404
 
@@ -699,6 +763,35 @@ If the root folder is not writable, adjust file permissions or use the dynamic s
 
 ---
 
+### sitemap.xml shows a sitemap index
+
+This is expected on multilingual Joomla websites when multilingual sitemap support is enabled.
+
+In this case, `sitemap.xml` lists language-specific sitemap files such as:
+
+```text
+/sitemap-en.xml
+/sitemap-tr.xml
+```
+
+Open each language sitemap file to review the URLs for that language.
+
+---
+
+### Multilingual sitemap files are missing
+
+Check:
+
+1. XML sitemap is enabled.
+2. Multilingual sitemap support is enabled.
+3. Joomla content languages are published.
+4. Joomla Language Filter plugin is enabled.
+5. Each site language has a valid home menu item.
+6. Articles are assigned to the correct content language.
+7. Physical sitemap generation was run again after changing language settings.
+
+---
+
 ### Redirects are not working
 
 Check:
@@ -772,7 +865,30 @@ Then return to:
 Components → JT SEO Control Center → System Status
 ```
 
-## Version 1.0.62
+---
+
+## Version 1.0.63
+
+### Release Type
+
+Multilingual sitemap support release for Joomla 6.
+
+### Changes
+
+* Added multilingual sitemap support for Joomla websites using multiple content languages.
+* Added sitemap index output for multilingual websites via `sitemap.xml`.
+* Added dedicated sitemap output for each published content language, such as `sitemap-en.xml` and `sitemap-tr.xml`.
+* Improved sitemap generation to respect Joomla content language values.
+* Improved article URL generation by using language-aware Joomla routing.
+* Added a new multilingual sitemap configuration option.
+* Updated package, component and plugin versions to `1.0.63`.
+* Added database update marker for version `1.0.63`.
+* Improved sitemap compatibility for multilingual Joomla websites.
+* Added multilingual sitemap support based on community feedback from GitHub user `@niaziblog`.
+
+---
+
+## Previous Version 1.0.62
 
 ### Release Type
 
@@ -812,6 +928,8 @@ LICENSE.txt
 ## Credits
 
 Developed by JoomTheme.
+
+Multilingual sitemap support was added based on community feedback from GitHub user `@niaziblog`.
 
 Website:
 
