@@ -6,10 +6,10 @@
         <element>pkg_jtseo</element>
         <type>package</type>
         <client>site</client>
-        <version>1.0.62</version>
+        <version>1.0.63</version>
         <infourl title="JT SEO Control Center">https://github.com/joomtheme/JT-SEO-Control-Center</infourl>
         <downloads>
-            <downloadurl type="full" format="zip">https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v1.0.62/pkg_jtseo_v1.0.62.zip</downloadurl>
+            <downloadurl type="full" format="zip">https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v1.0.63/pkg_jtseo_v1.0.63.zip</downloadurl>
         </downloads>
         <tags>
             <tag>stable</tag>
@@ -18,7 +18,7 @@
         <maintainerurl>https://joomtheme.com</maintainerurl>
         <targetplatform name="joomla" version="6.*" />
         <php_minimum>8.3.0</php_minimum>
-        <sha256>f5114623ecf03aa4bc66633899334486fbe4821a40eebb183f43dc5047cbde63</sha256>
+        <sha256>a32f8e3377a6282bd41cf11e770b9c6479860f23f99bda94293e4c3a461ff653</sha256>
         <changelogurl>https://raw.githubusercontent.com/joomtheme/JT-SEO-Control-Center/main/updates/changelog.xml</changelogurl>
     </update>
 </updates>
