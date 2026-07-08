@@ -3,6 +3,39 @@
     <changelog>
         <element>pkg_jtseo</element>
         <type>package</type>
+        <version>1.0.64</version>
+
+        <security>
+            <item>No security fixes.</item>
+        </security>
+
+        <addition>
+            <item>Added multilingual sitemap index support with language-specific sitemap files.</item>
+            <item>Added paginated sitemap output for large multilingual websites.</item>
+            <item>Added support for sitemap files using language tags and page indexes, such as sitemap.tr-TR.1.xml and sitemap.en-GB.1.xml.</item>
+            <item>Added a maximum links per sitemap file setting for sitemap pagination.</item>
+        </addition>
+
+        <change>
+            <item>Changed sitemap.xml to serve as a master sitemap index when multilingual sitemap output is enabled.</item>
+            <item>Improved sitemap index output to include language-specific paginated sitemap files.</item>
+            <item>Improved browser display consistency for SEF and non-SEF sitemap XML URLs.</item>
+            <item>Updated package, component, plugin and asset versions to 1.0.64.</item>
+        </change>
+
+        <fix>
+            <item>Fixed sitemap exclusion for Joomla menu items with robots settings containing noindex.</item>
+            <item>Fixed sitemap generation so noindex menu paths and their child URLs are excluded from sitemap output.</item>
+            <item>Fixed tag menu sitemap leakage when a tag menu path such as /tag is marked as noindex.</item>
+            <item>Fixed missing XML stylesheet display for SEF sitemap.xml output.</item>
+            <item>Improved cleanup of old generated sitemap files during installation and updates.</item>
+            <item>Added database update marker for version 1.0.64.</item>
+        </fix>
+    </changelog>
+
+    <changelog>
+        <element>pkg_jtseo</element>
+        <type>package</type>
         <version>1.0.63</version>
 
         <security>
@@ -12,7 +45,7 @@
         <addition>
             <item>Added multilingual sitemap support for Joomla websites using multiple content languages.</item>
             <item>Added sitemap index output for multilingual websites via sitemap.xml.</item>
-            <item>Added dedicated sitemap output for each published content language, such as sitemap-en.xml and sitemap-tr.xml.</item>
+            <item>Added dedicated sitemap output for each published content language.</item>
             <item>Added a new multilingual sitemap configuration option.</item>
         </addition>
 
