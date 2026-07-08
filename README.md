@@ -27,6 +27,8 @@ The package includes:
 * XML sitemap generation
 * Multilingual XML sitemap support
 * Sitemap index support for multilingual websites
+* Paginated sitemap files for large multilingual websites
+* Noindex menu path exclusion for sitemap output
 * Optional physical `sitemap.xml` creation
 * 404 tracking with privacy-friendly logging options
 * Redirect manager with 301, 302, 307, 308 and 410 support
@@ -52,7 +54,7 @@ JT SEO Control Center is distributed as a Joomla package extension.
 Install this file through Joomla:
 
 ```text
-pkg_jtseo_v1.0.63.zip
+pkg_jtseo_v1.0.64.zip
 ```
 
 The package installs the following child extensions:
@@ -303,6 +305,7 @@ Sitemap features:
 * Include homepage
 * Include published Joomla articles
 * Exclude articles marked as noindex
+* Exclude Joomla menu paths marked as noindex, including child URLs
 * Exclude fallback component URLs
 * Configurable article limit
 * Dynamic XML endpoint
@@ -310,6 +313,7 @@ Sitemap features:
 * Multilingual sitemap support for Joomla websites using multiple content languages
 * Sitemap index output for multilingual websites
 * Dedicated sitemap output for each published content language
+* Paginated sitemap files with a configurable maximum links limit
 
 For standard single-language websites, the sitemap can be accessed as:
 
@@ -317,15 +321,19 @@ For standard single-language websites, the sitemap can be accessed as:
 https://example.com/sitemap.xml
 ```
 
-For multilingual websites, `sitemap.xml` can work as a sitemap index and point to language-specific sitemap files such as:
+For multilingual websites, `sitemap.xml` can work as a sitemap index and point to language-specific paginated sitemap files such as:
 
 ```text
 https://example.com/sitemap.xml
-https://example.com/sitemap-en.xml
-https://example.com/sitemap-tr.xml
+https://example.com/sitemap.en-GB.1.xml
+https://example.com/sitemap.tr-TR.1.xml
 ```
 
+If a language contains more URLs than the configured maximum links per sitemap file, JT SEO Control Center automatically splits that language into additional sitemap files, for example `sitemap.en-GB.2.xml`.
+
 In multilingual mode, article sitemap generation respects Joomla content language values and uses language-aware Joomla routing when building article URLs.
+
+If a Joomla menu item has a robots value containing `noindex`, that menu path and its child URLs are excluded from sitemap output. For example, if `/tag` is marked as `noindex`, `/tag` and `/tag/*` URLs are removed from the sitemap.
 
 If the Joomla root folder is not writable, physical sitemap generation may fail. The dashboard system status will warn about this.
 
@@ -335,17 +343,17 @@ If the Joomla root folder is not writable, physical sitemap generation may fail.
 
 JT SEO Control Center supports multilingual Joomla websites with multiple published content languages.
 
-When multilingual sitemap support is enabled, `/sitemap.xml` can act as a sitemap index and link to dedicated sitemap files for each published language.
+When multilingual sitemap support is enabled, `/sitemap.xml` can act as a master sitemap index and link to dedicated sitemap files for each published language.
 
 Example sitemap index output:
 
 ```xml
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <sitemap>
-        <loc>https://example.com/sitemap-en.xml</loc>
+        <loc>https://example.com/sitemap.en-GB.1.xml</loc>
     </sitemap>
     <sitemap>
-        <loc>https://example.com/sitemap-tr.xml</loc>
+        <loc>https://example.com/sitemap.tr-TR.1.xml</loc>
     </sitemap>
 </sitemapindex>
 ```
@@ -353,8 +361,15 @@ Example sitemap index output:
 Example language sitemap files:
 
 ```text
-/sitemap-en.xml
-/sitemap-tr.xml
+/sitemap.en-GB.1.xml
+/sitemap.tr-TR.1.xml
+```
+
+Large language sitemaps can be split into multiple files based on the configured maximum links per sitemap file, for example:
+
+```text
+/sitemap.en-GB.1.xml
+/sitemap.en-GB.2.xml
 ```
 
 Each language sitemap is generated from published Joomla articles assigned to the matching content language.
@@ -469,7 +484,7 @@ If a required plugin is disabled or a database table is missing, the dashboard d
 3. Upload the package ZIP file:
 
 ```text
-pkg_jtseo_v1.0.63.zip
+pkg_jtseo_v1.0.64.zip
 ```
 
 4. Wait for Joomla to complete the package installation.
@@ -519,9 +534,10 @@ Recommended first setup:
 8. Enable article SEO fields.
 9. Enable XML sitemap.
 10. Enable multilingual sitemap support if the website uses multiple content languages.
-11. Enable physical `sitemap.xml` generation if the Joomla root folder is writable.
-12. Enable redirects if redirect management is needed.
-13. Enable 404 logging if broken URL tracking is needed.
+11. Review the maximum links per sitemap file setting for large websites.
+12. Enable physical `sitemap.xml` generation if the Joomla root folder is writable.
+13. Enable redirects if redirect management is needed.
+14. Enable 404 logging if broken URL tracking is needed.
 
 ---
 
@@ -574,23 +590,26 @@ Recommended sitemap workflow:
 4. Enable noindex exclusion.
 5. Enable fallback URL exclusion.
 6. Enable multilingual sitemap support if the site uses multiple content languages.
-7. Enable physical `sitemap.xml` generation if possible.
-8. Open the dashboard.
-9. Click **Generate sitemap.xml**.
-10. Visit:
+7. Review the maximum links per sitemap file setting if the site has many URLs.
+8. Enable physical `sitemap.xml` generation if possible.
+9. Open the dashboard.
+10. Click **Generate sitemap.xml**.
+11. Visit:
 
 ```text
 https://example.com/sitemap.xml
 ```
 
-11. Submit the sitemap URL to search engine webmaster tools.
+12. Submit the sitemap URL to search engine webmaster tools.
 
 For multilingual websites, also check the language-specific sitemap files listed inside `sitemap.xml`, for example:
 
 ```text
-https://example.com/sitemap-en.xml
-https://example.com/sitemap-tr.xml
+https://example.com/sitemap.en-GB.1.xml
+https://example.com/sitemap.tr-TR.1.xml
 ```
+
+If menu paths such as `/tag` should not appear in the sitemap, set the related Joomla menu item's robots option to a value containing `noindex`, then regenerate the sitemap.
 
 ---
 
@@ -635,6 +654,7 @@ Recommended redirect workflow:
 | Exclude noindex articles                | Removes noindex articles from sitemap                         |
 | Exclude component fallback article URLs | Avoids fallback component article URLs                        |
 | Enable multilingual sitemap             | Generates a sitemap index and language-specific sitemap files |
+| Max links per sitemap file              | Splits large language sitemaps into paginated sitemap files   |
 | Generate physical sitemap.xml           | Writes a real sitemap.xml file to the Joomla root             |
 | Article limit                           | Maximum number of articles included                           |
 
@@ -770,11 +790,24 @@ This is expected on multilingual Joomla websites when multilingual sitemap suppo
 In this case, `sitemap.xml` lists language-specific sitemap files such as:
 
 ```text
-/sitemap-en.xml
-/sitemap-tr.xml
+/sitemap.en-GB.1.xml
+/sitemap.tr-TR.1.xml
 ```
 
-Open each language sitemap file to review the URLs for that language.
+Open each language sitemap file to review the URLs for that language. Large language sitemaps may also include additional files such as `sitemap.en-GB.2.xml`.
+
+---
+
+### Noindex menu URLs still appear in the sitemap
+
+Check:
+
+1. The related Joomla menu item has a robots value containing `noindex`.
+2. The URL belongs to that menu path or one of its child paths.
+3. Physical sitemap generation was run again after changing the menu robots setting.
+4. Joomla cache, browser cache, CDN cache or server cache is not showing an older sitemap file.
+
+For example, if `/tag` is marked as `noindex`, `/tag` and `/tag/*` URLs should be excluded after regenerating the sitemap.
 
 ---
 
@@ -867,7 +900,31 @@ Components → JT SEO Control Center → System Status
 
 ---
 
-## Version 1.0.63
+## Version 1.0.64
+
+### Release Type
+
+Multilingual sitemap index, sitemap pagination and noindex menu exclusion release for Joomla 6.
+
+### Changes
+
+* Added multilingual sitemap index support with language-specific sitemap files.
+* Added paginated sitemap output for large multilingual websites.
+* Added sitemap files using language tags and page indexes, such as `sitemap.tr-TR.1.xml` and `sitemap.en-GB.1.xml`.
+* Added a maximum links per sitemap file setting for sitemap pagination.
+* Changed `sitemap.xml` to serve as a master sitemap index when multilingual sitemap output is enabled.
+* Improved sitemap index output to include language-specific paginated sitemap files.
+* Fixed sitemap exclusion for Joomla menu items with robots settings containing `noindex`.
+* Fixed sitemap generation so noindex menu paths and their child URLs are excluded from sitemap output.
+* Fixed tag menu sitemap leakage when a tag menu path such as `/tag` is marked as `noindex`.
+* Fixed missing XML stylesheet display for SEF `sitemap.xml` output.
+* Improved cleanup of old generated sitemap files during installation and updates.
+* Updated package, component, plugin and asset versions to `1.0.64`.
+* Added database update marker for version `1.0.64`.
+
+---
+
+## Previous Version 1.0.63
 
 ### Release Type
 
@@ -877,7 +934,7 @@ Multilingual sitemap support release for Joomla 6.
 
 * Added multilingual sitemap support for Joomla websites using multiple content languages.
 * Added sitemap index output for multilingual websites via `sitemap.xml`.
-* Added dedicated sitemap output for each published content language, such as `sitemap-en.xml` and `sitemap-tr.xml`.
+* Added dedicated sitemap output for each published content language.
 * Improved sitemap generation to respect Joomla content language values.
 * Improved article URL generation by using language-aware Joomla routing.
 * Added a new multilingual sitemap configuration option.
@@ -929,7 +986,7 @@ LICENSE.txt
 
 Developed by JoomTheme.
 
-Multilingual sitemap support was added based on community feedback from GitHub user `@niaziblog`.
+Multilingual sitemap support, sitemap index pagination and noindex menu sitemap exclusion improvements were added based on community feedback from GitHub user `@niaziblog`.
 
 Website:
 
