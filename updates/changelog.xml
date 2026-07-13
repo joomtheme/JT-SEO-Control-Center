@@ -1,4 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
+    <changelog>
+        <element>pkg_jtseo</element>
+        <type>package</type>
+        <version>1.0.65.2</version>
+
+        <security>
+            <item>No security fixes.</item>
+        </security>
+
+        <addition>
+            <item>Added XML image sitemap support for articles and categories.</item>
+            <item>Added article image detection from Joomla Images and Links fields.</item>
+            <item>Added article content image detection from HTML image elements.</item>
+            <item>Added image count display in the sitemap browser stylesheet.</item>
+            <item>Added global sitemap include and exclude URL rules.</item>
+            <item>Added wildcard support for sitemap URL exclusions, such as /tag/*.</item>
+        </addition>
+
+        <change>
+            <item>Improved sitemap image handling with support for multiple images per URL.</item>
+            <item>Improved sitemap URL filtering logic for custom include and exclude rules.</item>
+            <item>Improved URL normalization for sitemap filtering operations.</item>
+            <item>Improved sitemap generation compatibility with Joomla 6 routing.</item>
+            <item>Updated package, component, plugin and asset versions to 1.0.65.2.</item>
+        </change>
+
+        <fix>
+            <item>Fixed missing article images in XML sitemap output when image integration was enabled.</item>
+            <item>Fixed sitemap image extraction for images embedded inside article content.</item>
+            <item>Fixed sitemap filtering edge cases for excluded URL paths and child URLs.</item>
+            <item>Fixed JED Checker false positive detection caused by URL decoding patterns.</item>
+            <item>Added database update marker for version 1.0.65.2.</item>
+        </fix>
+    </changelog>
+
 <changelogs>
     <changelog>
         <element>pkg_jtseo</element>
