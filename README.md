@@ -1001,7 +1001,7 @@ https://joomtheme.com
 For documentation, support and updates, visit:
 
 ```text
-https://joomtheme.com
+https://github.com/joomtheme/JT-SEO-Control-Center/blob/main/README.md
 ```
 
 GitHub repository:
