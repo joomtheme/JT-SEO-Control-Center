@@ -43,7 +43,7 @@ The package includes:
 -   Article content image detection for sitemap images
 -   Sitemap image count display in XML browser stylesheet
 -   Global sitemap include and exclude URL rules
--   Wildcard URL filtering support for sitemap exclusions
+-   Multilingual-aware wildcard URL filtering for sitemap include and exclude rules
 -   Noindex menu path exclusion for sitemap output
 -   Optional physical `sitemap.xml` creation
 -   404 tracking with privacy-friendly logging options
@@ -71,7 +71,7 @@ JT SEO Control Center is distributed as a Joomla package extension.
 Install this file through Joomla:
 
 ``` text
-pkg_jtseo_v1.0.65.2.zip
+pkg_jtseo_v1.0.65.3.zip
 ```
 
 The package installs the following child extensions:
@@ -435,6 +435,61 @@ Recommended Joomla multilingual setup:
 
 ------------------------------------------------------------------------
 
+### Custom Sitemap Include and Exclude Rules
+
+JT SEO Control Center supports custom path rules for controlling generated
+sitemap URLs.
+
+Enter one rule per line. Rules should use site-local SEF paths beginning
+with `/`; do not include the domain name.
+
+Examples:
+
+``` text
+/mycotoxin
+/mycotoxin/*
+```
+
+Rule behavior:
+
+-   `/mycotoxin` matches only the exact path.
+-   `/mycotoxin/*` matches child paths below `/mycotoxin/`.
+-   To remove both the parent path and every child URL, add both rules.
+-   Included URL rules take priority over Excluded URL rules for matching
+    URLs already produced by sitemap generation.
+
+On multilingual websites, an unprefixed logical path rule is also matched
+against language-prefixed routes. For example:
+
+``` text
+/mycotoxin/*
+```
+
+matches generated URLs such as:
+
+``` text
+/en/mycotoxin/magazine/invisible-your-eggs
+/tr/mycotoxin/magazine/invisible-your-eggs
+```
+
+To target only a language-prefixed route, include the Joomla URL language
+code in the rule:
+
+``` text
+/en/mycotoxin
+/en/mycotoxin/*
+```
+
+This leaves other language-prefixed paths unchanged. If Joomla removes the
+language code from the default language URL, path-only rules cannot
+distinguish that default language from another unprefixed route.
+
+After changing Included URLs or Excluded URLs settings, save the component
+options and click **Generate sitemap.xml** again. Review the relevant
+language-specific sitemap files, not only the main sitemap index.
+
+------------------------------------------------------------------------
+
 ### Redirects and 404 Manager
 
 JT SEO Control Center includes a redirect and 404 manager for migration
@@ -546,7 +601,7 @@ dashboard displays a warning.
 3.  Upload the package ZIP file:
 
 ``` text
-pkg_jtseo_v1.0.65.2.zip
+pkg_jtseo_v1.0.65.3.zip
 ```
 
 4.  Wait for Joomla to complete the package installation.
@@ -955,6 +1010,33 @@ should be excluded after regenerating the sitemap.
 
 ------------------------------------------------------------------------
 
+### Custom Excluded URLs still appear in the sitemap
+
+Check:
+
+1.  Each rule starts with `/`.
+2.  Wildcard child rules use the form `/parent/*`.
+3.  The exact parent path is also listed separately when it must be
+    excluded.
+4.  Component options were saved before regenerating the sitemap.
+5.  **Generate sitemap.xml** was clicked after changing the rules.
+6.  The correct language-specific sitemap file was checked.
+7.  Joomla cache, browser cache, CDN cache or server cache is not serving
+    an older sitemap file.
+
+For example, to remove both the parent path and all descendants, use:
+
+``` text
+/mycotoxin
+/mycotoxin/*
+```
+
+On multilingual sites, `/mycotoxin/*` also matches language-prefixed child
+URLs such as `/en/mycotoxin/...`. To target only English prefixed URLs,
+use `/en/mycotoxin` and `/en/mycotoxin/*`.
+
+------------------------------------------------------------------------
+
 ### Multilingual sitemap files are missing
 
 Check:
@@ -1046,7 +1128,34 @@ Components → JT SEO Control Center → System Status
 
 ------------------------------------------------------------------------
 
-## Version 1.0.65.2
+## Version 1.0.65.3
+
+### Release Type
+
+Multilingual sitemap wildcard filtering and package compatibility hotfix
+for Joomla 6.
+
+### Changes
+
+-   Fixed wildcard Excluded URLs rules such as `/mycotoxin/*` on
+    multilingual Joomla websites.
+-   Improved matching of language-prefixed generated URLs such as
+    `/en/mycotoxin/...` and `/tr/mycotoxin/...`.
+-   Preserved language-specific filtering through explicit URL language
+    prefixes such as `/en/mycotoxin/*`.
+-   Fixed child URLs remaining in sitemap output when their multilingual
+    parent path matched an exclusion wildcard.
+-   Fixed package manifest version reporting.
+-   Fixed invalid or missing package-level file references reported by JED
+    Checker.
+-   Improved Joomla Extension Directory package compatibility.
+-   Updated package, component, plugin and asset versions to `1.0.65.3`.
+-   Verified Included URLs and Excluded URLs behavior through multilingual
+    community testing.
+
+------------------------------------------------------------------------
+
+## Previous Version 1.0.65.2
 
 ### Release Type
 
@@ -1059,8 +1168,8 @@ filtering improvements for Joomla 6.
 -   Added article image detection from Joomla Images and Links fields.
 -   Added article content image detection from embedded HTML images.
 -   Added image count display in the sitemap browser stylesheet.
--   Added global Included URLs configuration for manually adding sitemap
-    URLs.
+-   Added global Included URLs rules for preserving matching generated
+    sitemap URLs.
 -   Added global Excluded URLs configuration for manually removing
     sitemap URLs.
 -   Added wildcard support for URL exclusions such as `/tag/*`.
@@ -1182,9 +1291,10 @@ LICENSE.txt
 
 Developed by JoomTheme.
 
-Multilingual sitemap support, sitemap index pagination and noindex menu
-sitemap exclusion improvements were added based on community feedback
-from GitHub user `@niaziblog`.
+Multilingual sitemap support, sitemap index pagination, noindex menu
+sitemap exclusion and multilingual Included/Excluded URL filtering
+improvements were developed with community feedback and testing from
+GitHub user `@niaziblog`.
 
 Website:
 
