@@ -3,6 +3,46 @@
     <changelog>
         <element>pkg_jtseo</element>
         <type>package</type>
+        <version>1.0.66</version>
+
+        <security>
+            <item>No security fixes.</item>
+        </security>
+
+        <addition>
+            <item>Added frontend JSON-LD structured data output for Joomla pages.</item>
+            <item>Added Organization and LocalBusiness schema support.</item>
+            <item>Added dedicated homepage schema configuration.</item>
+            <item>Added WebSite, WebPage, Article and ImageObject structured data support.</item>
+            <item>Added component-independent WebPage schema support for SP Page Builder and other non-article Joomla pages.</item>
+            <item>Added multilingual schema fields based on Joomla language tags.</item>
+            <item>Added language-specific Organization name, alternate name, description, logo, email, telephone and address values.</item>
+            <item>Added dateModified to Article structured data using the Joomla article modification date.</item>
+            <item>Added Organization logo support for structured data and Open Graph image fallback.</item>
+            <item>Added database update marker for version 1.0.66.</item>
+        </addition>
+
+        <change>
+            <item>Improved structured data handling from administrator preview mappings to frontend JSON-LD output.</item>
+            <item>Improved Open Graph site name handling with multilingual Organization values when available.</item>
+            <item>Improved Article structured data with publication date, modification date, author, image, category and publisher relationships.</item>
+            <item>Improved structured data compatibility for Joomla page builders and non-article component pages.</item>
+            <item>Updated Structured Data configuration options and administrator language strings.</item>
+            <item>Updated package, component and plugin versions to 1.0.66.</item>
+            <item>Updated README documentation for the 1.0.66 release.</item>
+        </change>
+
+        <fix>
+            <item>Added duplicate structured data detection to reduce conflicting JSON-LD output when a template or another extension already provides schema markup.</item>
+            <item>Prevented duplicate WebPage and Article schema output when matching structured data already exists on the page.</item>
+            <item>Improved schema relationship handling to avoid invalid references when existing structured data is detected.</item>
+            <item>Passed JED Checker validation for the 1.0.66 package.</item>
+        </fix>
+    </changelog>
+
+    <changelog>
+        <element>pkg_jtseo</element>
+        <type>package</type>
         <version>1.0.65.3</version>
 
         <security>
