@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
+<changelog>
+    <element>pkg_jtseo</element>
+    <type>package</type>
+    <version>1.0.67</version>
+
+    <security>
+        <item>No security fixes.</item>
+    </security>
+
+    <addition>
+        <item>Added a dedicated global and language-specific WebSite name for WebSite schema and og:site_name.</item>
+        <item>Added Joomla core Schema.org graph enhancement so core structured data can remain enabled without competing JT SEO Article/WebPage graphs.</item>
+        <item>Added a database update marker for version 1.0.67.</item>
+    </addition>
+
+    <change>
+        <item>Improved multilingual structured data identity handling by separating Organization/LocalBusiness name from WebSite name.</item>
+        <item>Improved Joomla core Schema.org compatibility by enriching the native graph in place when it is available.</item>
+        <item>Improved Organization logo output with absolute URL and contentUrl values.</item>
+        <item>Kept page-builder and non-article pages as WebPage structured data without synthetic article dates.</item>
+        <item>Updated package, component, plugin, asset and health-check versions to 1.0.67.</item>
+    </change>
+
+    <fix>
+        <item>Fixed Joomla Article structured data missing datePublished and dateModified when Joomla core schema output is active.</item>
+        <item>Fixed datePublished fallback to Joomla created date when publish_up is unavailable.</item>
+        <item>Fixed dateModified fallback to datePublished when a separate modification date is unavailable.</item>
+        <item>Fixed relative Schema image and logo URLs resolving below multilingual page paths and causing 404 errors.</item>
+        <item>Fixed WebSite.name and og:site_name using the default-language site identity on other languages.</item>
+        <item>Prevented JT SEO from publishing a competing Article/WebPage JSON-LD graph when the Joomla core Schema.org graph is detected.</item>
+    </fix>
+</changelog>
+
 <changelogs>
     <changelog>
         <element>pkg_jtseo</element>
