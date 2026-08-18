@@ -3,22 +3,22 @@
     <update>
         <name>JT SEO Control Center</name>
         <description>Manage Joomla SEO from one dashboard with article SEO tools, XML sitemaps, multilingual structured data, JSON-LD schema, redirects and 404 tracking.</description>
-    <element>pkg_jtseo</element>
-    <type>package</type>
-    <client>site</client>
-    <version>1.0.66</version>
-    <infourl title="JT SEO Control Center">https://github.com/joomtheme/JT-SEO-Control-Center</infourl>
-    <downloads>
-        <downloadurl type="full" format="zip">https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v1.0.66/pkg_jtseo_v1.0.66.zip</downloadurl>
-    </downloads>
-    <tags>
-        <tag>stable</tag>
-    </tags>
-    <maintainer>JoomTheme</maintainer>
-    <maintainerurl>https://joomtheme.com</maintainerurl>
-    <targetplatform name="joomla" version="6.*" />
-    <php_minimum>8.3.0</php_minimum>
-    <sha256>021f82c168c971bbd4ee9cbee5544ce3c560273c9297025e16c0ca418e910ebe</sha256>
-    <changelogurl>https://raw.githubusercontent.com/joomtheme/JT-SEO-Control-Center/main/updates/changelog.xml</changelogurl>
-</update>
+        <element>pkg_jtseo</element>
+        <type>package</type>
+        <client>site</client>
+        <version>1.0.67</version>
+        <infourl title="JT SEO Control Center">https://github.com/joomtheme/JT-SEO-Control-Center</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v1.0.67/pkg_jtseo_v1.0.67.zip</downloadurl>
+        </downloads>
+        <tags>
+            <tag>stable</tag>
+        </tags>
+        <maintainer>JoomTheme</maintainer>
+        <maintainerurl>https://joomtheme.com</maintainerurl>
+        <targetplatform name="joomla" version="6.*" />
+        <php_minimum>8.3.0</php_minimum>
+        <sha256>9576609942bdfde05138ea3e4e8737a18ee0036aa08d78d3d9988e55fe9d7c01</sha256>
+        <changelogurl>https://raw.githubusercontent.com/joomtheme/JT-SEO-Control-Center/main/updates/changelog.xml</changelogurl>
+    </update>
 </updates>
