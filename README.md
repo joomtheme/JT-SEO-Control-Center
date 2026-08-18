@@ -52,8 +52,11 @@ The package includes:
 -   Homepage `Organization` or `LocalBusiness` Schema
 -   `WebSite`, `WebPage` and `Article` Schema output
 -   Generic `WebPage` Schema support for SP Page Builder and other non-article component pages
+-   Dedicated global and language-specific `WebSite.name` configuration
 -   Multilingual Schema identity fields based on Joomla language tags
--   Article `datePublished` and `dateModified` structured data
+-   Article `datePublished` and `dateModified` structured data using Joomla publication and modification dates
+-   Absolute Schema image and logo URL normalization for multilingual routes
+-   Joomla core Schema.org graph enhancement without competing `Article` / `WebPage` graphs
 -   Existing JSON-LD detection to reduce duplicate Schema output
 -   English and Turkish language support
 
@@ -77,7 +80,7 @@ JT SEO Control Center is distributed as a Joomla package extension.
 Install this file through Joomla:
 
 ``` text
-pkg_jtseo_v1.0.66.zip
+pkg_jtseo_v1.0.67.zip
 ```
 
 The package installs the following child extensions:
@@ -341,8 +344,9 @@ Schema.org structured data. If no normal Open Graph fallback image is
 available, the configured organization logo can also be used as the standard
 `og:image` fallback. JT SEO does not output a non-standard `og:logo` property.
 
-On multilingual websites, the active language-specific organization name can
-also be used for `og:site_name`.
+`og:site_name` uses the configured website name. On multilingual websites,
+the active language-specific website name is used when available, with fallback
+to the global website name.
 
 ------------------------------------------------------------------------
 
@@ -580,9 +584,14 @@ Supported frontend structured data includes:
 #### Homepage Schema
 
 The homepage can use either `Organization` or `LocalBusiness` as the site
-identity type. Configurable fields include:
+identity type. Website identity and organization identity are configured
+separately so the `WebSite.name` value does not have to match the organization
+or business name.
 
--   Name
+Configurable fields include:
+
+-   Website name
+-   Organization / LocalBusiness name
 -   Alternate name
 -   Description
 -   Logo
@@ -605,6 +614,10 @@ structured data to non-article frontend pages. This is component-independent,
 so pages rendered by SP Page Builder and other Joomla components do not need a
 dedicated integration just to receive the basic page-level Schema.
 
+Generic `WebPage` output does not receive synthetic `datePublished` or
+`dateModified` values. Article publication and modification dates are reserved
+for Joomla article structured data.
+
 #### Multilingual Schema identity
 
 Language-specific Schema values can be configured using Joomla content language
@@ -612,7 +625,8 @@ tags such as `en-GB`, `de-DE` and `tr-TR`.
 
 Per-language overrides are available for:
 
--   Name
+-   Website name
+-   Organization / LocalBusiness name
 -   Alternate name
 -   Description
 -   Logo
@@ -628,18 +642,46 @@ When a matching language row exists, JT SEO uses those values for the active
 frontend language. Empty language-specific values fall back to the global
 Schema settings.
 
+The website name is independent from the Organization / LocalBusiness name.
+This allows `WebSite.name` and `og:site_name` to use the correct localized site
+name while the organization identity keeps its own localized name.
+
 #### Article dates
 
-Joomla article pages can output both `datePublished` and `dateModified`. The
-modification value uses Joomla's article modification date and falls back to
-the publication date when a separate modification date is unavailable.
+Joomla article pages can output both `datePublished` and `dateModified`.
+`datePublished` uses the Joomla article publication date and falls back to the
+created date when the publication date is unavailable. `dateModified` uses the
+Joomla article modification date and falls back to `datePublished` when a
+separate modification date is unavailable.
+
+#### Absolute Schema media URLs
+
+JT SEO normalizes Schema image and logo paths to absolute site-root URLs. This
+prevents relative paths such as `images/logo.png` from resolving below a
+multilingual page route such as `/en/products/images/logo.png`.
+
+#### Joomla core Schema.org compatibility
+
+Joomla core Schema.org support may remain enabled. When JT SEO detects Joomla's
+native Schema graph, it enhances the existing graph in place instead of
+publishing a competing `Article` or `WebPage` graph.
+
+The enhancement can apply configured multilingual identity values, absolute
+media URLs and Joomla article publication / modification dates. If the Joomla
+core Schema graph is unavailable, JT SEO can continue to generate its own
+JSON-LD graph.
 
 #### Duplicate Schema protection
 
 JT SEO can inspect existing `application/ld+json` blocks before inserting its
 own graph. When duplicate protection is enabled, matching Schema types and
-`@id` values are skipped so the extension can coexist more safely with
-templates, page builders and other SEO/Schema extensions.
+`@id` values are handled conservatively to reduce competing structured data.
+
+JSON-LD duplicate protection cannot safely remove Article Microdata embedded
+directly by a template with `itemscope`, `itemtype` and `itemprop`. If a
+template publishes a separate Article Microdata entity, remove that Article
+Microdata from the template when using Joomla / JT SEO JSON-LD Article output
+to avoid two Article entities in structured-data validators.
 
 The dashboard Structured Data panel remains useful for reviewing the generated
 mappings and sample JSON-LD.
@@ -672,7 +714,7 @@ dashboard displays a warning.
 3.  Upload the package ZIP file:
 
 ``` text
-pkg_jtseo_v1.0.66.zip
+pkg_jtseo_v1.0.67.zip
 ```
 
 4.  Wait for Joomla to complete the package installation.
@@ -725,18 +767,20 @@ Recommended first setup:
 8.  Enable article SEO fields.
 9.  Enable Structured Data output.
 10. Choose `Organization` or `LocalBusiness` for the homepage identity.
-11. Configure the organization name, logo and other identity fields.
-12. Add language-specific Schema values if the website is multilingual.
-13. Keep existing Schema detection enabled when another extension, template or
-    page builder may already output JSON-LD.
-14. Enable XML sitemap.
-15. Enable multilingual sitemap support if the website uses multiple content
+11. Configure the website name separately from the organization / business name.
+12. Configure the logo and other organization identity fields.
+13. Add language-specific website and organization identity values if the site
+    is multilingual.
+14. Keep existing Schema detection enabled when Joomla core Schema.org, another
+    extension, template or page builder may already output structured data.
+15. Enable XML sitemap.
+16. Enable multilingual sitemap support if the website uses multiple content
     languages.
-16. Review the maximum links per sitemap file setting for large websites.
-17. Enable physical `sitemap.xml` generation if the Joomla root folder is
+17. Review the maximum links per sitemap file setting for large websites.
+18. Enable physical `sitemap.xml` generation if the Joomla root folder is
     writable.
-18. Enable redirects if redirect management is needed.
-19. Enable 404 logging if broken URL tracking is needed.
+19. Enable redirects if redirect management is needed.
+20. Enable 404 logging if broken URL tracking is needed.
 
 ------------------------------------------------------------------------
 
@@ -878,21 +922,26 @@ Recommended redirect workflow:
   Enable WebPage Schema        Adds general `WebPage` Schema to supported
                                non-article frontend pages
 
-  Skip existing Schema         Checks existing JSON-LD and skips matching
-                               types / `@id` values to reduce duplicates
+  Skip existing Schema         Detects existing JSON-LD and reduces
+                               competing structured-data output
 
   Homepage Schema type         Selects `Organization` or `LocalBusiness`
 
-  Organization identity        Configures name, alternate name,
-                               description, logo, email and telephone
+  Website name                 Configures the global `WebSite.name` value and
+                               `og:site_name` identity
+
+  Organization identity        Configures organization / business name,
+                               alternate name, description, logo, email and
+                               telephone
 
   Organization address         Configures street, locality, region, postal
                                code and country
 
   Organization sameAs          Adds valid HTTP/HTTPS social or profile URLs
 
-  Language-specific Schema     Overrides identity fields for published
-  settings                     Joomla language tags
+  Language-specific Schema     Overrides website name and organization
+  settings                     identity fields for published Joomla language
+                               tags
   -----------------------------------------------------------------------
 
 ### XML Sitemap
@@ -946,8 +995,8 @@ Recommended redirect workflow:
   -----------------------------------------------------------------------
   Option                     Description
   -------------------------- --------------------------------------------
-  Add Open Graph site name   Adds `og:site_name` using the Joomla site
-                             name
+  Add Open Graph site name   Adds `og:site_name` using the configured
+                             website name for the active language
 
   Add generator meta         Adds a JT SEO generator meta tag
 
@@ -1079,17 +1128,25 @@ available.
 
 ------------------------------------------------------------------------
 
-### Structured Data appears to be missing when another extension outputs Schema
+### Structured Data appears to be missing when Joomla core or another extension outputs Schema
 
 If **Skip existing Schema** is enabled, JT SEO intentionally checks existing
-JSON-LD and can skip matching Schema types or `@id` values. This helps prevent
-duplicate structured data when a template, page builder or another SEO
-extension already outputs similar Schema.
+JSON-LD before publishing its own graph. On Joomla pages where the native core
+Schema.org graph is available, JT SEO can enhance that graph in place instead
+of adding a second competing `Article` or `WebPage` graph.
 
-Temporarily review the existing page source before disabling duplicate
-protection. Avoid publishing multiple competing `Article`, `WebPage`,
-`Organization` or `WebSite` graphs unless you intentionally manage their
-relationships.
+Inspect the complete page source before assuming JT SEO output is missing. Look
+inside the existing Joomla JSON-LD graph for the configured multilingual
+identity, absolute media URLs and Article `datePublished` / `dateModified`
+values.
+
+Avoid publishing multiple competing `Article`, `WebPage`, `Organization` or
+`WebSite` graphs unless you intentionally manage their relationships.
+
+If a validator still reports two Article entities, inspect the template for
+Article Microdata using `itemscope`, `itemtype` or `itemprop`. JSON-LD duplicate
+protection does not remove template Microdata; remove the duplicate Article
+Microdata from the template when Joomla / JT SEO JSON-LD is the intended source.
 
 ------------------------------------------------------------------------
 
@@ -1261,7 +1318,53 @@ Components → JT SEO Control Center → System Status
 
 ------------------------------------------------------------------------
 
-## Version 1.0.66
+## Version 1.0.67
+
+### Release Type
+
+Joomla Schema compatibility and multilingual structured-data fixes for Joomla 6.
+
+### Changes
+
+-   Fixed Joomla Article `datePublished` to use the real Joomla publication date
+    and fall back to the created date when necessary.
+-   Fixed `dateModified` to use the real Joomla modification date and fall back
+    to `datePublished` when necessary.
+-   Fixed relative Schema image and logo URLs that could resolve below
+    multilingual paths such as `/en/products/images/...` and return 404 errors.
+-   Added a dedicated global and language-specific website name for
+    `WebSite.name` and `og:site_name`.
+-   Separated Organization / LocalBusiness name from website name in
+    multilingual structured-data identity settings.
+-   Improved Joomla core Schema.org compatibility by enhancing the native graph
+    in place when it is available.
+-   Prevented JT SEO from publishing a competing `Article` / `WebPage` JSON-LD
+    graph when the Joomla core Schema.org graph is detected.
+-   Kept SP Page Builder and other non-article component pages as `WebPage`
+    structured data without synthetic Article publication / modification dates.
+-   Added a database update marker for version `1.0.67`.
+-   Updated package, component, plugin, asset and health-check versions to
+    `1.0.67`.
+
+### Joomla core Schema.org compatibility
+
+Joomla core Schema.org support may remain enabled. JT SEO detects the native
+Joomla graph and enhances it with configured multilingual identity values,
+absolute media URLs and Joomla Article publication / modification dates.
+
+If Joomla core Schema output is unavailable, JT SEO continues to generate its
+own JSON-LD graph.
+
+### Template Microdata note
+
+JSON-LD duplicate protection cannot safely remove Article Microdata embedded
+in a template with `itemscope`, `itemtype` and `itemprop`. If a template creates
+an additional Article Microdata entity, remove that Article Microdata when
+Joomla / JT SEO JSON-LD Article output is being used.
+
+------------------------------------------------------------------------
+
+## Previous Version 1.0.66
 
 ### Release Type
 
