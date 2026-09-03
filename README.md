@@ -57,7 +57,8 @@ The package includes:
 -   Article `datePublished` and `dateModified` structured data using Joomla publication and modification dates
 -   Absolute Schema image and logo URL normalization for multilingual routes
 -   Joomla core Schema.org graph enhancement without competing `Article` / `WebPage` graphs
--   Existing JSON-LD detection to reduce duplicate Schema output
+-   Preservation of explicitly selected Joomla core item schemas such as `Book`, `Event` and `Recipe`
+-   Existing JSON-LD detection that distinguishes declared entities from reference-only `@id` values
 -   English and Turkish language support
 
 ------------------------------------------------------------------------
@@ -80,7 +81,7 @@ JT SEO Control Center is distributed as a Joomla package extension.
 Install this file through Joomla:
 
 ``` text
-pkg_jtseo_v1.0.67.zip
+pkg_jtseo_v1.0.68.zip
 ```
 
 The package installs the following child extensions:
@@ -578,7 +579,8 @@ Supported frontend structured data includes:
 -   `Organization` or `LocalBusiness` for site identity
 -   `WebSite` for the website
 -   `WebPage` for frontend pages
--   `Article` for Joomla article pages
+-   `Article` for Joomla article pages when Joomla does not provide an explicit item-level type
+-   Joomla core item schemas such as `Book`, `Event` and `Recipe` when configured for the content item
 -   `ImageObject` when a suitable page or article image is available
 
 #### Homepage Schema
@@ -666,16 +668,27 @@ Joomla core Schema.org support may remain enabled. When JT SEO detects Joomla's
 native Schema graph, it enhances the existing graph in place instead of
 publishing a competing `Article` or `WebPage` graph.
 
-The enhancement can apply configured multilingual identity values, absolute
-media URLs and Joomla article publication / modification dates. If the Joomla
-core Schema graph is unavailable, JT SEO can continue to generate its own
-JSON-LD graph.
+Explicitly selected Joomla item-level types such as `Book`, `Event` and `Recipe`
+are preserved. If Joomla's base graph is present but the selected item-level
+entity is missing from the rendered graph, JT SEO can restore that entity from
+Joomla's own `#__schemaorg` record and connect `WebPage.mainEntity` to it.
+
+When Joomla core Schema output is disabled or unavailable and no explicit core
+item schema is active, JT SEO continues to generate its fallback `Article`
+entity for Joomla article pages. This also works on SEF and multilingual Single
+Article menu routes where the routed article id may only be available from the
+active menu item during late rendering events.
 
 #### Duplicate Schema protection
 
 JT SEO can inspect existing `application/ld+json` blocks before inserting its
 own graph. When duplicate protection is enabled, matching Schema types and
 `@id` values are handled conservatively to reduce competing structured data.
+
+A reference-only `@id` such as a `WebPage.mainEntity` pointer is not treated as
+an existing declared entity unless the referenced node itself declares an
+`@type`. This prevents references from accidentally suppressing JT SEO's real
+fallback `Article` entity.
 
 JSON-LD duplicate protection cannot safely remove Article Microdata embedded
 directly by a template with `itemscope`, `itemtype` and `itemprop`. If a
@@ -714,7 +727,7 @@ dashboard displays a warning.
 3.  Upload the package ZIP file:
 
 ``` text
-pkg_jtseo_v1.0.67.zip
+pkg_jtseo_v1.0.68.zip
 ```
 
 4.  Wait for Joomla to complete the package installation.
@@ -1122,9 +1135,11 @@ Check:
 4.  The response is a normal frontend HTML page.
 5.  Joomla, template, server or CDN cache is not serving older HTML.
 
-For article pages, inspect the page source for an `application/ld+json` script
-and verify `Article`, `datePublished` and `dateModified` when the values are
-available.
+For article pages without an explicit Joomla core item schema, inspect the page
+source for an `application/ld+json` script and verify `Article`,
+`datePublished` and `dateModified` when the values are available. If an
+explicit Joomla type such as `Book` is configured for the article, verify that
+selected type instead of expecting a competing fallback `Article` entity.
 
 ------------------------------------------------------------------------
 
@@ -1137,8 +1152,12 @@ of adding a second competing `Article` or `WebPage` graph.
 
 Inspect the complete page source before assuming JT SEO output is missing. Look
 inside the existing Joomla JSON-LD graph for the configured multilingual
-identity, absolute media URLs and Article `datePublished` / `dateModified`
-values.
+identity, absolute media URLs and the configured item-level entity. For normal
+Article output, also verify `datePublished` / `dateModified` values.
+
+If Joomla has an explicit item schema such as `Book`, `Event` or `Recipe`, JT
+SEO preserves that entity and links `WebPage.mainEntity` to it. It does not add
+a fallback `Article` solely to create a second content entity.
 
 Avoid publishing multiple competing `Article`, `WebPage`, `Organization` or
 `WebSite` graphs unless you intentionally manage their relationships.
@@ -1318,7 +1337,48 @@ Components → JT SEO Control Center → System Status
 
 ------------------------------------------------------------------------
 
-## Version 1.0.67
+## Version 1.0.68
+
+### Release Type
+
+Article fallback and Joomla core Schema.org integration regression fixes for
+Joomla 6.
+
+### Changes
+
+-   Fixed fallback `Article` JSON-LD being suppressed when another structured
+    data node only referenced the Article `@id` without declaring the Article
+    entity itself.
+-   Improved Joomla article detection for SEF and multilingual Single Article
+    menu routes where late rendering events may no longer expose the routed
+    article `view` or `id` directly.
+-   Preserved explicitly selected Joomla core item schemas such as `Book`,
+    `Event` and `Recipe` instead of replacing them with a fallback `Article`.
+-   Restored the selected Joomla core item schema from Joomla's `#__schemaorg`
+    record when the base graph exists but the item-level node is missing from
+    the rendered JSON-LD.
+-   Updated `WebPage.mainEntity` to reference the preserved Joomla item-level
+    schema entity when a custom core type is selected.
+-   Continued enriching Joomla-rendered `Article`, `NewsArticle` and
+    `BlogPosting` nodes with multilingual identity, absolute media URLs and
+    publication / modification dates.
+-   Added a database update marker for version `1.0.68`.
+-   Updated package, component, plugin, asset and health-check versions to
+    `1.0.68`.
+
+### Joomla core Schema.org compatibility
+
+Joomla core Schema.org support may remain enabled. JT SEO now respects the
+item-level schema selected for an article and preserves custom types such as
+`Book` rather than generating a competing fallback `Article`.
+
+When Joomla core Schema.org output is unavailable or disabled, JT SEO continues
+to generate its own `Organization` / `LocalBusiness`, `WebSite`, `WebPage` and
+`Article` graph for Joomla article pages.
+
+------------------------------------------------------------------------
+
+## Previous Version 1.0.67
 
 ### Release Type
 
