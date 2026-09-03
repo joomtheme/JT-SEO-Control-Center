@@ -1,38 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<changelog>
-    <element>pkg_jtseo</element>
-    <type>package</type>
-    <version>1.0.67</version>
-
-    <security>
-        <item>No security fixes.</item>
-    </security>
-
-    <addition>
-        <item>Added a dedicated global and language-specific WebSite name for WebSite schema and og:site_name.</item>
-        <item>Added Joomla core Schema.org graph enhancement so core structured data can remain enabled without competing JT SEO Article/WebPage graphs.</item>
-        <item>Added a database update marker for version 1.0.67.</item>
-    </addition>
-
-    <change>
-        <item>Improved multilingual structured data identity handling by separating Organization/LocalBusiness name from WebSite name.</item>
-        <item>Improved Joomla core Schema.org compatibility by enriching the native graph in place when it is available.</item>
-        <item>Improved Organization logo output with absolute URL and contentUrl values.</item>
-        <item>Kept page-builder and non-article pages as WebPage structured data without synthetic article dates.</item>
-        <item>Updated package, component, plugin, asset and health-check versions to 1.0.67.</item>
-    </change>
-
-    <fix>
-        <item>Fixed Joomla Article structured data missing datePublished and dateModified when Joomla core schema output is active.</item>
-        <item>Fixed datePublished fallback to Joomla created date when publish_up is unavailable.</item>
-        <item>Fixed dateModified fallback to datePublished when a separate modification date is unavailable.</item>
-        <item>Fixed relative Schema image and logo URLs resolving below multilingual page paths and causing 404 errors.</item>
-        <item>Fixed WebSite.name and og:site_name using the default-language site identity on other languages.</item>
-        <item>Prevented JT SEO from publishing a competing Article/WebPage JSON-LD graph when the Joomla core Schema.org graph is detected.</item>
-    </fix>
-</changelog>
-
 <changelogs>
+    <changelog>
+        <element>pkg_jtseo</element>
+        <type>package</type>
+        <version>1.0.68</version>
+
+        <security>
+            <item>No security fixes.</item>
+        </security>
+
+        <addition>
+            <item>Added recovery of explicitly selected Joomla core item-level Schema.org data from Joomla's own schema storage when the base graph is present but the content entity is missing.</item>
+            <item>Added a database update marker for version 1.0.68.</item>
+        </addition>
+
+        <change>
+            <item>Improved Joomla article detection for SEF and multilingual Single Article menu routes where routed input may no longer expose the article view or id during late rendering events.</item>
+            <item>Improved Joomla core Schema.org coexistence so explicitly selected content types such as Book, Event and Recipe are preserved instead of being replaced by a fallback Article node.</item>
+            <item>Improved duplicate structured-data detection so reference-only @id values are not treated as declared schema entities.</item>
+            <item>Updated package, component, plugin, asset and health-check versions to 1.0.68.</item>
+        </change>
+
+        <fix>
+            <item>Fixed fallback Article JSON-LD being suppressed when Joomla core Schema.org output is disabled and another node only references the Article @id.</item>
+            <item>Fixed Joomla core item schemas such as Book not appearing in the final JSON-LD graph in affected article configurations.</item>
+            <item>Fixed JT SEO fallback Article generation overriding an explicitly configured Joomla core schema type.</item>
+            <item>Fixed WebPage mainEntity relationships so they point to the preserved Joomla item-level schema entity when a custom core schema type is selected.</item>
+        </fix>
+    </changelog>
+
+    <changelog>
+        <element>pkg_jtseo</element>
+        <type>package</type>
+        <version>1.0.67</version>
+
+        <security>
+            <item>No security fixes.</item>
+        </security>
+
+        <addition>
+            <item>Added a dedicated global and language-specific WebSite name for WebSite schema and og:site_name.</item>
+            <item>Added Joomla core Schema.org graph enhancement so core structured data can remain enabled without competing JT SEO Article/WebPage graphs.</item>
+            <item>Added a database update marker for version 1.0.67.</item>
+        </addition>
+
+        <change>
+            <item>Improved multilingual structured data identity handling by separating Organization/LocalBusiness name from WebSite name.</item>
+            <item>Improved Joomla core Schema.org compatibility by enriching the native graph in place when it is available.</item>
+            <item>Improved Organization logo output with absolute URL and contentUrl values.</item>
+            <item>Kept page-builder and non-article pages as WebPage structured data without synthetic article dates.</item>
+            <item>Updated package, component, plugin, asset and health-check versions to 1.0.67.</item>
+        </change>
+
+        <fix>
+            <item>Fixed Joomla Article structured data missing datePublished and dateModified when Joomla core schema output is active.</item>
+            <item>Fixed datePublished fallback to Joomla created date when publish_up is unavailable.</item>
+            <item>Fixed dateModified fallback to datePublished when a separate modification date is unavailable.</item>
+            <item>Fixed relative Schema image and logo URLs resolving below multilingual page paths and causing 404 errors.</item>
+            <item>Fixed WebSite.name and og:site_name using the default-language site identity on other languages.</item>
+            <item>Prevented JT SEO from publishing a competing Article/WebPage JSON-LD graph when the Joomla core Schema.org graph is detected.</item>
+        </fix>
+    </changelog>
+
     <changelog>
         <element>pkg_jtseo</element>
         <type>package</type>
@@ -98,41 +127,41 @@
     </changelog>
 
     <changelog>
-            <element>pkg_jtseo</element>
-            <type>package</type>
-            <version>1.0.65.2</version>
+        <element>pkg_jtseo</element>
+        <type>package</type>
+        <version>1.0.65.2</version>
 
-            <security>
-                <item>No security fixes.</item>
-            </security>
+        <security>
+            <item>No security fixes.</item>
+        </security>
 
-            <addition>
-                <item>Added XML image sitemap support for articles and categories.</item>
-                <item>Added article image detection from Joomla Images and Links fields.</item>
-                <item>Added article content image detection from HTML image elements.</item>
-                <item>Added image count display in the sitemap browser stylesheet.</item>
-                <item>Added global sitemap include and exclude URL rules.</item>
-                <item>Added wildcard support for sitemap URL exclusions, such as /tag/*.</item>
-            </addition>
+        <addition>
+            <item>Added XML image sitemap support for articles and categories.</item>
+            <item>Added article image detection from Joomla Images and Links fields.</item>
+            <item>Added article content image detection from HTML image elements.</item>
+            <item>Added image count display in the sitemap browser stylesheet.</item>
+            <item>Added global sitemap include and exclude URL rules.</item>
+            <item>Added wildcard support for sitemap URL exclusions, such as /tag/*.</item>
+        </addition>
 
-            <change>
-                <item>Improved sitemap image handling with support for multiple images per URL.</item>
-                <item>Improved sitemap URL filtering logic for custom include and exclude rules.</item>
-                <item>Improved URL normalization for sitemap filtering operations.</item>
-                <item>Improved sitemap generation compatibility with Joomla 6 routing.</item>
-                <item>Updated package, component, plugin and asset versions to 1.0.65.2.</item>
-            </change>
+        <change>
+            <item>Improved sitemap image handling with support for multiple images per URL.</item>
+            <item>Improved sitemap URL filtering logic for custom include and exclude rules.</item>
+            <item>Improved URL normalization for sitemap filtering operations.</item>
+            <item>Improved sitemap generation compatibility with Joomla 6 routing.</item>
+            <item>Updated package, component, plugin and asset versions to 1.0.65.2.</item>
+        </change>
 
-            <fix>
-                <item>Fixed missing article images in XML sitemap output when image integration was enabled.</item>
-                <item>Fixed sitemap image extraction for images embedded inside article content.</item>
-                <item>Fixed sitemap filtering edge cases for excluded URL paths and child URLs.</item>
-                <item>Fixed JED Checker false positive detection caused by URL decoding patterns.</item>
-                <item>Added database update marker for version 1.0.65.2.</item>
-            </fix>
-        </changelog>
+        <fix>
+            <item>Fixed missing article images in XML sitemap output when image integration was enabled.</item>
+            <item>Fixed sitemap image extraction for images embedded inside article content.</item>
+            <item>Fixed sitemap filtering edge cases for excluded URL paths and child URLs.</item>
+            <item>Fixed JED Checker false positive detection caused by URL decoding patterns.</item>
+            <item>Added database update marker for version 1.0.65.2.</item>
+        </fix>
+    </changelog>
 
-<changelog>
+    <changelog>
         <element>pkg_jtseo</element>
         <type>package</type>
         <version>1.0.64</version>
