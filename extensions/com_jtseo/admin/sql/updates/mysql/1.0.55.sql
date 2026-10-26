@@ -1,0 +1,1 @@
+-- JT SEO Control Center 1.0.56 schema marker.

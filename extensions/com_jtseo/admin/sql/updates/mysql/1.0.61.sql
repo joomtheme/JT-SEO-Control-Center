@@ -1,0 +1,3 @@
+-- JT SEO Control Center 1.0.61
+-- Runtime/dashboard 404 logging reliability update.
+-- Schema is also guarded by script.php for MariaDB/MySQL compatibility.

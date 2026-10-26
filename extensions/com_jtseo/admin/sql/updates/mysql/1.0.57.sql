@@ -1,0 +1,2 @@
+-- JT SEO Control Center 1.0.57
+-- Language string maintenance release. No database schema changes.

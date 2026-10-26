@@ -1,0 +1,2 @@
+-- JT SEO Control Center 1.0.56 schema marker.
+-- No database changes. UI layout refinement for Bulk Meta Manager filters.

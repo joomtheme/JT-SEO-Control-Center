@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <fieldset name="global_seo" label="COM_JTSEO_CONFIG_GLOBAL_SEO_LABEL">
+        <field
+            name="enable_homepage_metadata"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_ENABLE_HOMEPAGE_METADATA_LABEL"
+            description="COM_JTSEO_CONFIG_ENABLE_HOMEPAGE_METADATA_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="homepage_title"
+            type="text"
+            label="COM_JTSEO_CONFIG_HOMEPAGE_TITLE_LABEL"
+            description="COM_JTSEO_CONFIG_HOMEPAGE_TITLE_DESC"
+            maxlength="255"
+            filter="string" />
+        <field
+            name="homepage_description"
+            type="textarea"
+            label="COM_JTSEO_CONFIG_HOMEPAGE_DESCRIPTION_LABEL"
+            description="COM_JTSEO_CONFIG_HOMEPAGE_DESCRIPTION_DESC"
+            rows="4"
+            cols="60"
+            maxlength="320"
+            filter="string" />
+        <field
+            name="default_og_image"
+            type="media"
+            label="COM_JTSEO_CONFIG_DEFAULT_OG_IMAGE_LABEL"
+            description="COM_JTSEO_CONFIG_DEFAULT_OG_IMAGE_DESC"
+            directory="images"
+            preview="true" />
+        <field
+            name="twitter_card"
+            type="list"
+            default="summary_large_image"
+            label="COM_JTSEO_CONFIG_TWITTER_CARD_LABEL"
+            description="COM_JTSEO_CONFIG_TWITTER_CARD_DESC">
+            <option value="summary">COM_JTSEO_OPTION_TWITTER_SUMMARY</option>
+            <option value="summary_large_image">COM_JTSEO_OPTION_TWITTER_SUMMARY_LARGE_IMAGE</option>
+        </field>
+        <field
+            name="enable_canonical"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_ENABLE_CANONICAL_LABEL"
+            description="COM_JTSEO_CONFIG_ENABLE_CANONICAL_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="enable_article_metadata"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_ENABLE_ARTICLE_METADATA_LABEL"
+            description="COM_JTSEO_CONFIG_ENABLE_ARTICLE_METADATA_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="enable_article_images"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_ENABLE_ARTICLE_IMAGES_LABEL"
+            description="COM_JTSEO_CONFIG_ENABLE_ARTICLE_IMAGES_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="enable_article_fields"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_ENABLE_ARTICLE_FIELDS_LABEL"
+            description="COM_JTSEO_CONFIG_ENABLE_ARTICLE_FIELDS_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="seo_score_min_words"
+            type="number"
+            default="100"
+            min="0"
+            max="5000"
+            step="10"
+            label="COM_JTSEO_CONFIG_SEO_SCORE_MIN_WORDS_LABEL"
+            description="COM_JTSEO_CONFIG_SEO_SCORE_MIN_WORDS_DESC" />
+    </fieldset>
+    <fieldset name="structured_data" label="COM_JTSEO_CONFIG_STRUCTURED_DATA_LABEL">
+        <field
+            name="enable_structured_data"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_ENABLE_STRUCTURED_DATA_LABEL"
+            description="COM_JTSEO_CONFIG_ENABLE_STRUCTURED_DATA_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="enable_webpage_schema"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_ENABLE_WEBPAGE_SCHEMA_LABEL"
+            description="COM_JTSEO_CONFIG_ENABLE_WEBPAGE_SCHEMA_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="schema_skip_existing"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_SCHEMA_SKIP_EXISTING_LABEL"
+            description="COM_JTSEO_CONFIG_SCHEMA_SKIP_EXISTING_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="homepage_schema_type"
+            type="list"
+            default="Organization"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_HOMEPAGE_SCHEMA_TYPE_LABEL"
+            description="COM_JTSEO_CONFIG_HOMEPAGE_SCHEMA_TYPE_DESC">
+            <option value="Organization">COM_JTSEO_SCHEMA_TYPE_ORGANIZATION</option>
+            <option value="LocalBusiness">COM_JTSEO_SCHEMA_TYPE_LOCALBUSINESS</option>
+        </field>
+        <field
+            name="organization_name"
+            type="text"
+            maxlength="255"
+            filter="string"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_ORGANIZATION_NAME_LABEL"
+            description="COM_JTSEO_CONFIG_ORGANIZATION_NAME_DESC" />
+        <field
+            name="website_name"
+            type="text"
+            maxlength="255"
+            filter="string"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_WEBSITE_NAME_LABEL"
+            description="COM_JTSEO_CONFIG_WEBSITE_NAME_DESC" />
+        <field
+            name="organization_alternate_name"
+            type="text"
+            maxlength="255"
+            filter="string"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_ORGANIZATION_ALTERNATE_NAME_LABEL"
+            description="COM_JTSEO_CONFIG_ORGANIZATION_ALTERNATE_NAME_DESC" />
+        <field
+            name="organization_description"
+            type="textarea"
+            rows="4"
+            cols="60"
+            maxlength="500"
+            filter="string"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_ORGANIZATION_DESCRIPTION_LABEL"
+            description="COM_JTSEO_CONFIG_ORGANIZATION_DESCRIPTION_DESC" />
+        <field
+            name="organization_logo"
+            type="media"
+            directory="images"
+            preview="true"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_ORGANIZATION_LOGO_LABEL"
+            description="COM_JTSEO_CONFIG_ORGANIZATION_LOGO_DESC" />
+        <field
+            name="organization_email"
+            type="email"
+            filter="email"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_ORGANIZATION_EMAIL_LABEL"
+            description="COM_JTSEO_CONFIG_ORGANIZATION_EMAIL_DESC" />
+        <field
+            name="organization_telephone"
+            type="tel"
+            filter="string"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_ORGANIZATION_TELEPHONE_LABEL"
+            description="COM_JTSEO_CONFIG_ORGANIZATION_TELEPHONE_DESC" />
+        <field
+            name="organization_street_address"
+            type="text"
+            maxlength="255"
+            filter="string"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_ORGANIZATION_STREET_ADDRESS_LABEL"
+            description="COM_JTSEO_CONFIG_ORGANIZATION_STREET_ADDRESS_DESC" />
+        <field
+            name="organization_address_locality"
+            type="text"
+            maxlength="255"
+            filter="string"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_ORGANIZATION_ADDRESS_LOCALITY_LABEL"
+            description="COM_JTSEO_CONFIG_ORGANIZATION_ADDRESS_LOCALITY_DESC" />
+        <field
+            name="organization_address_region"
+            type="text"
+            maxlength="255"
+            filter="string"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_ORGANIZATION_ADDRESS_REGION_LABEL"
+            description="COM_JTSEO_CONFIG_ORGANIZATION_ADDRESS_REGION_DESC" />
+        <field
+            name="organization_postal_code"
+            type="text"
+            maxlength="32"
+            filter="string"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_ORGANIZATION_POSTAL_CODE_LABEL"
+            description="COM_JTSEO_CONFIG_ORGANIZATION_POSTAL_CODE_DESC" />
+        <field
+            name="organization_address_country"
+            type="text"
+            maxlength="64"
+            filter="string"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_ORGANIZATION_ADDRESS_COUNTRY_LABEL"
+            description="COM_JTSEO_CONFIG_ORGANIZATION_ADDRESS_COUNTRY_DESC" />
+        <field
+            name="organization_same_as"
+            type="textarea"
+            rows="5"
+            cols="60"
+            filter="raw"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_ORGANIZATION_SAME_AS_LABEL"
+            description="COM_JTSEO_CONFIG_ORGANIZATION_SAME_AS_DESC" />
+        <field
+            name="schema_language_settings"
+            type="subform"
+            formsource="administrator/components/com_jtseo/forms/schema_language.xml"
+            multiple="true"
+            max="100"
+            validate="Subform"
+            layout="joomla.form.field.subform.repeatable"
+            showon="enable_structured_data:1"
+            label="COM_JTSEO_CONFIG_SCHEMA_LANGUAGE_SETTINGS_LABEL"
+            description="COM_JTSEO_CONFIG_SCHEMA_LANGUAGE_SETTINGS_DESC" />
+    </fieldset>
+    <fieldset name="sitemap" label="COM_JTSEO_CONFIG_SITEMAP_LABEL">
+        <field
+            name="enable_sitemap"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_ENABLE_SITEMAP_LABEL"
+            description="COM_JTSEO_CONFIG_ENABLE_SITEMAP_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="sitemap_include_homepage"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_SITEMAP_INCLUDE_HOMEPAGE_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_INCLUDE_HOMEPAGE_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="sitemap_include_articles"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_SITEMAP_INCLUDE_ARTICLES_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_INCLUDE_ARTICLES_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="sitemap_include_images"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="0"
+            label="COM_JTSEO_CONFIG_SITEMAP_INCLUDE_IMAGES_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_INCLUDE_IMAGES_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="sitemap_homepage_changefreq"
+            type="list"
+            default="daily"
+            label="COM_JTSEO_CONFIG_SITEMAP_HOMEPAGE_CHANGEFREQ_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_HOMEPAGE_CHANGEFREQ_DESC">
+            <option value="always">COM_JTSEO_CHANGEFREQ_ALWAYS</option>
+            <option value="hourly">COM_JTSEO_CHANGEFREQ_HOURLY</option>
+            <option value="daily">COM_JTSEO_CHANGEFREQ_DAILY</option>
+            <option value="weekly">COM_JTSEO_CHANGEFREQ_WEEKLY</option>
+            <option value="monthly">COM_JTSEO_CHANGEFREQ_MONTHLY</option>
+            <option value="yearly">COM_JTSEO_CHANGEFREQ_YEARLY</option>
+            <option value="never">COM_JTSEO_CHANGEFREQ_NEVER</option>
+        </field>
+        <field
+            name="sitemap_homepage_priority"
+            type="number"
+            default="1.0"
+            min="0"
+            max="1"
+            step="0.1"
+            label="COM_JTSEO_CONFIG_SITEMAP_HOMEPAGE_PRIORITY_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_HOMEPAGE_PRIORITY_DESC" />
+        <field
+            name="sitemap_homepage_lastmod_source"
+            type="list"
+            default="none"
+            label="COM_JTSEO_CONFIG_SITEMAP_HOMEPAGE_LASTMOD_SOURCE_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_HOMEPAGE_LASTMOD_SOURCE_DESC">
+            <option value="none">COM_JTSEO_HOMEPAGE_LASTMOD_NONE</option>
+            <option value="latest_article">COM_JTSEO_HOMEPAGE_LASTMOD_LATEST_ARTICLE</option>
+        </field>
+        <field
+            name="sitemap_homepage_language_settings"
+            type="subform"
+            formsource="administrator/components/com_jtseo/forms/sitemap_homepage_language.xml"
+            multiple="true"
+            max="100"
+            validate="Subform"
+            layout="joomla.form.field.subform.repeatable-table"
+            label="COM_JTSEO_CONFIG_SITEMAP_HOMEPAGE_LANGUAGE_SETTINGS_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_HOMEPAGE_LANGUAGE_SETTINGS_DESC" />
+        <field
+            name="sitemap_internal_changefreq"
+            type="list"
+            default="weekly"
+            label="COM_JTSEO_CONFIG_SITEMAP_INTERNAL_CHANGEFREQ_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_INTERNAL_CHANGEFREQ_DESC">
+            <option value="always">COM_JTSEO_CHANGEFREQ_ALWAYS</option>
+            <option value="hourly">COM_JTSEO_CHANGEFREQ_HOURLY</option>
+            <option value="daily">COM_JTSEO_CHANGEFREQ_DAILY</option>
+            <option value="weekly">COM_JTSEO_CHANGEFREQ_WEEKLY</option>
+            <option value="monthly">COM_JTSEO_CHANGEFREQ_MONTHLY</option>
+            <option value="yearly">COM_JTSEO_CHANGEFREQ_YEARLY</option>
+            <option value="never">COM_JTSEO_CHANGEFREQ_NEVER</option>
+        </field>
+        <field
+            name="sitemap_internal_priority"
+            type="number"
+            default="0.8"
+            min="0"
+            max="1"
+            step="0.1"
+            label="COM_JTSEO_CONFIG_SITEMAP_INTERNAL_PRIORITY_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_INTERNAL_PRIORITY_DESC" />
+        <field
+            name="sitemap_excluded_urls"
+            type="textarea"
+            rows="8"
+            cols="80"
+            filter="raw"
+            label="COM_JTSEO_CONFIG_SITEMAP_EXCLUDED_URLS_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_EXCLUDED_URLS_DESC" />
+        <field
+            name="sitemap_included_urls"
+            type="textarea"
+            rows="8"
+            cols="80"
+            filter="raw"
+            label="COM_JTSEO_CONFIG_SITEMAP_INCLUDED_URLS_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_INCLUDED_URLS_DESC" />
+        <field
+            name="sitemap_exclude_noindex"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_SITEMAP_EXCLUDE_NOINDEX_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_EXCLUDE_NOINDEX_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="sitemap_multilingual_index"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_SITEMAP_MULTILINGUAL_INDEX_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_MULTILINGUAL_INDEX_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="sitemap_links_per_file"
+            type="number"
+            default="10000"
+            min="1"
+            max="50000"
+            step="1"
+            showon="sitemap_multilingual_index:1"
+            label="COM_JTSEO_CONFIG_SITEMAP_LINKS_PER_FILE_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_LINKS_PER_FILE_DESC" />
+
+        <field
+            name="sitemap_exclude_fallback_urls"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_SITEMAP_EXCLUDE_FALLBACK_URLS_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_EXCLUDE_FALLBACK_URLS_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+
+        <field
+            name="sitemap_write_physical"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_SITEMAP_WRITE_PHYSICAL_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_WRITE_PHYSICAL_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="sitemap_article_limit"
+            type="number"
+            default="50000"
+            min="1"
+            max="50000"
+            step="1"
+            label="COM_JTSEO_CONFIG_SITEMAP_ARTICLE_LIMIT_LABEL"
+            description="COM_JTSEO_CONFIG_SITEMAP_ARTICLE_LIMIT_DESC" />
+    </fieldset>
+
+    <fieldset name="redirects" label="COM_JTSEO_CONFIG_REDIRECTS_LABEL">
+        <field
+            name="enable_redirects"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_ENABLE_REDIRECTS_LABEL"
+            description="COM_JTSEO_CONFIG_ENABLE_REDIRECTS_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="enable_404_logging"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_ENABLE_404_LOGGING_LABEL"
+            description="COM_JTSEO_CONFIG_ENABLE_404_LOGGING_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="redirect_log_query_strings"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="0"
+            label="COM_JTSEO_CONFIG_LOG_QUERY_STRINGS_LABEL"
+            description="COM_JTSEO_CONFIG_LOG_QUERY_STRINGS_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="redirect_log_referrers"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_LOG_REFERRERS_LABEL"
+            description="COM_JTSEO_CONFIG_LOG_REFERRERS_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="redirect_log_user_agents"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="0"
+            label="COM_JTSEO_CONFIG_LOG_USER_AGENTS_LABEL"
+            description="COM_JTSEO_CONFIG_LOG_USER_AGENTS_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+    </fieldset>
+
+    <fieldset name="support" label="COM_JTSEO_CONFIG_SUPPORT_LABEL">
+        <field
+            name="show_support_card"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            default="1"
+            label="COM_JTSEO_CONFIG_SHOW_SUPPORT_CARD_LABEL"
+            description="COM_JTSEO_CONFIG_SHOW_SUPPORT_CARD_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field
+            name="jed_review_url"
+            type="url"
+            default="https://extensions.joomla.org/profile/profile/details/147240/"
+            label="COM_JTSEO_CONFIG_JED_REVIEW_URL_LABEL"
+            description="COM_JTSEO_CONFIG_JED_REVIEW_URL_DESC"
+            filter="url" />
+        <field
+            name="github_url"
+            type="url"
+            default="https://github.com/joomtheme/JT-SEO-Control-Center"
+            label="COM_JTSEO_CONFIG_GITHUB_URL_LABEL"
+            description="COM_JTSEO_CONFIG_GITHUB_URL_DESC"
+            filter="url" />
+        <field
+            name="support_development_url"
+            type="url"
+            default="https://joomtheme.com/support/jt-seo-control-center"
+            label="COM_JTSEO_CONFIG_SUPPORT_DEVELOPMENT_URL_LABEL"
+            description="COM_JTSEO_CONFIG_SUPPORT_DEVELOPMENT_URL_DESC"
+            filter="url" />
+    </fieldset>
+
+    <fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL">
+        <field name="rules" type="rules" label="JCONFIG_PERMISSIONS_LABEL" component="com_jtseo" section="component" />
+    </fieldset>
+</config>

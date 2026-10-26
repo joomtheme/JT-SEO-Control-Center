@@ -1,0 +1,2 @@
+-- JT SEO Control Center 1.0.60
+-- 404 logging event/cleanup reliability update; no database schema changes.

@@ -1,0 +1,1 @@
+-- JT SEO Control Center 1.0.69 schema marker. No database structure changes.

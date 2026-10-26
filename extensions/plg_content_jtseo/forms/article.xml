@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields name="attribs">
+        <fieldset name="jtseo" label="PLG_SYSTEM_JTSEO_FIELDSET_ARTICLE_SEO_LABEL">
+            <field
+                name="jtseo_title"
+                type="text"
+                label="PLG_SYSTEM_JTSEO_FIELD_ARTICLE_TITLE_LABEL"
+                description="PLG_SYSTEM_JTSEO_FIELD_ARTICLE_TITLE_DESC"
+                maxlength="255"
+                filter="string" />
+            <field
+                name="jtseo_description"
+                type="textarea"
+                label="PLG_SYSTEM_JTSEO_FIELD_ARTICLE_DESCRIPTION_LABEL"
+                description="PLG_SYSTEM_JTSEO_FIELD_ARTICLE_DESCRIPTION_DESC"
+                rows="4"
+                cols="60"
+                maxlength="320"
+                filter="string" />
+            <field
+                name="jtseo_canonical"
+                type="url"
+                label="PLG_SYSTEM_JTSEO_FIELD_ARTICLE_CANONICAL_LABEL"
+                description="PLG_SYSTEM_JTSEO_FIELD_ARTICLE_CANONICAL_DESC"
+                filter="url" />
+            <field
+                name="jtseo_og_image"
+                type="media"
+                label="PLG_SYSTEM_JTSEO_FIELD_ARTICLE_OG_IMAGE_LABEL"
+                description="PLG_SYSTEM_JTSEO_FIELD_ARTICLE_OG_IMAGE_DESC"
+                directory="images"
+                preview="true" />
+            <field
+                name="jtseo_robots_index"
+                type="list"
+                default=""
+                label="PLG_SYSTEM_JTSEO_FIELD_ARTICLE_ROBOTS_INDEX_LABEL"
+                description="PLG_SYSTEM_JTSEO_FIELD_ARTICLE_ROBOTS_INDEX_DESC">
+                <option value="">PLG_SYSTEM_JTSEO_OPTION_USE_DEFAULT</option>
+                <option value="index">index</option>
+                <option value="noindex">noindex</option>
+            </field>
+            <field
+                name="jtseo_robots_follow"
+                type="list"
+                default=""
+                label="PLG_SYSTEM_JTSEO_FIELD_ARTICLE_ROBOTS_FOLLOW_LABEL"
+                description="PLG_SYSTEM_JTSEO_FIELD_ARTICLE_ROBOTS_FOLLOW_DESC">
+                <option value="">PLG_SYSTEM_JTSEO_OPTION_USE_DEFAULT</option>
+                <option value="follow">follow</option>
+                <option value="nofollow">nofollow</option>
+            </field>
+        </fieldset>
+    </fields>
+</form>

@@ -1,0 +1,2 @@
+-- JT SEO Control Center 1.0.62
+-- Changelog metadata update marker.

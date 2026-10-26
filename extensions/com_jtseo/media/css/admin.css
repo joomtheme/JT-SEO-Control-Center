@@ -1,0 +1,505 @@
+.com-jtseo-dashboard .card {
+    min-height: 10rem;
+}
+
+.com-jtseo-dashboard .jtseo-audit-table-wrap {
+    border: 1px solid var(--border-color, #dfe3e7);
+    border-radius: .375rem;
+}
+
+.com-jtseo-dashboard .jtseo-audit-table-scroll {
+    max-height: 760px !important;
+    overflow-y: auto !important;
+    overflow-x: auto !important;
+    display: block;
+    overscroll-behavior: contain;
+}
+
+.com-jtseo-dashboard .jtseo-audit-table-scroll table {
+    min-width: 100%;
+}
+
+.com-jtseo-dashboard .jtseo-audit-table-scroll thead th {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--template-bg-light, #f0f4fb);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .08);
+}
+
+.com-jtseo-dashboard .jtseo-audit-table-scroll tbody tr:last-child td {
+    border-bottom-width: 0;
+}
+
+
+.com-jtseo-dashboard .jtseo-404-list,
+.com-jtseo-dashboard .jtseo-404-item,
+.com-jtseo-dashboard .jtseo-404-main {
+    min-width: 0;
+}
+
+.com-jtseo-dashboard .jtseo-404-item {
+    background: var(--body-bg, #fff);
+}
+
+.com-jtseo-dashboard .jtseo-404-url {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: .35rem .5rem;
+    background: var(--template-bg-light, #f6f8fa);
+    border-radius: .25rem;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overflow-wrap: normal;
+    word-break: normal;
+}
+
+.com-jtseo-dashboard .jtseo-404-action-form {
+    width: 100%;
+    min-width: 0;
+    display: grid !important;
+    grid-template-columns: minmax(16rem, 1fr) 7rem auto;
+    gap: .5rem;
+    align-items: center;
+}
+
+.com-jtseo-dashboard .jtseo-404-status {
+    width: 100%;
+    min-width: 6rem;
+}
+
+.com-jtseo-dashboard .jtseo-404-submit {
+    white-space: nowrap;
+}
+
+@media (max-width: 767.98px) {
+    .com-jtseo-dashboard .jtseo-404-action-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+.com-jtseo-dashboard .jtseo-health-item.is-ok {
+    border-color: rgba(25, 135, 84, .35) !important;
+}
+
+.com-jtseo-dashboard .jtseo-health-item.is-warning {
+    border-color: rgba(255, 193, 7, .55) !important;
+    background: rgba(255, 193, 7, .06);
+}
+
+/* Dashboard layout migrated from inline template CSS in 1.0.46. */
+.com-jtseo-dashboard .jtseo-health-item.is-ok {
+    border-color: rgba(25, 135, 84, .35) !important;
+}
+.com-jtseo-dashboard .jtseo-health-item.is-warning {
+    border-color: rgba(255, 193, 7, .55) !important;
+    background: rgba(255, 193, 7, .06);
+}
+.com-jtseo-dashboard .jtseo-audit-table-wrap {
+    border: 1px solid var(--border-color, #dfe3e7);
+    border-radius: .375rem;
+}
+.com-jtseo-dashboard .jtseo-audit-table-scroll {
+    max-height: 760px !important;
+    overflow-y: auto !important;
+    overflow-x: auto !important;
+    display: block;
+    overscroll-behavior: contain;
+}
+.com-jtseo-dashboard .jtseo-audit-table-scroll table {
+    min-width: 100%;
+}
+.com-jtseo-dashboard .jtseo-audit-table-scroll thead th {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--template-bg-light, #f0f4fb);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .08);
+}
+
+.com-jtseo-dashboard .jtseo-audit-filter-bar {
+    background: var(--body-bg, #fff);
+    border: 1px solid var(--border-color, #dfe3e7);
+    border-radius: .375rem;
+    padding: 1rem;
+}
+.com-jtseo-dashboard .jtseo-audit-suggestion {
+    max-width: 34rem;
+}
+.com-jtseo-dashboard .jtseo-score-table-wrap {
+    border: 1px solid var(--border-color, #dfe3e7);
+    border-radius: .375rem;
+}
+.com-jtseo-dashboard .jtseo-score-notes {
+    max-width: 38rem;
+}
+.com-jtseo-dashboard .jtseo-score-progress {
+    min-width: 8rem;
+}
+.com-jtseo-dashboard .jtseo-audit-row[hidden] {
+    display: none !important;
+}
+.com-jtseo-dashboard .jtseo-url-cell {
+    max-width: 38rem;
+    word-break: break-word;
+}
+.com-jtseo-dashboard .jtseo-404-list,
+.com-jtseo-dashboard .jtseo-404-item,
+.com-jtseo-dashboard .jtseo-404-main {
+    min-width: 0;
+}
+.com-jtseo-dashboard .jtseo-404-item {
+    background: var(--body-bg, #fff);
+}
+.com-jtseo-dashboard .jtseo-404-url {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: .35rem .5rem;
+    background: var(--template-bg-light, #f6f8fa);
+    border-radius: .25rem;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overflow-wrap: normal;
+    word-break: normal;
+}
+.com-jtseo-dashboard .jtseo-404-action-form {
+    width: 100%;
+    min-width: 0;
+    display: grid !important;
+    grid-template-columns: minmax(16rem, 1fr) 7rem auto;
+    gap: .5rem;
+    align-items: center;
+}
+.com-jtseo-dashboard .jtseo-404-status {
+    width: 100%;
+    min-width: 6rem;
+}
+.com-jtseo-dashboard .jtseo-404-submit {
+    white-space: nowrap;
+}
+@media (max-width: 767.98px) {
+    .com-jtseo-dashboard .jtseo-404-action-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+.com-jtseo-dashboard .jtseo-bulk-filter-bar {
+    background: var(--body-bg, #fff);
+    border: 1px solid var(--border-color, #dfe3e7);
+    border-radius: .375rem;
+    padding: 1rem;
+}
+.com-jtseo-dashboard .jtseo-bulk-list {
+    border: 1px solid var(--border-color, #dfe3e7);
+    border-radius: .375rem;
+    max-height: 900px;
+    overflow: auto;
+}
+.com-jtseo-dashboard .jtseo-bulk-item {
+    border-bottom: 1px solid var(--border-color, #dfe3e7);
+    padding: 1rem;
+    background: var(--body-bg, #fff);
+}
+.com-jtseo-dashboard .jtseo-bulk-item:last-child {
+    border-bottom: 0;
+}
+.com-jtseo-dashboard .jtseo-bulk-score {
+    min-width: 7.5rem;
+}
+.com-jtseo-dashboard .jtseo-bulk-score .progress {
+    height: .55rem;
+}
+.com-jtseo-dashboard .jtseo-bulk-notes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem;
+}
+.com-jtseo-dashboard .jtseo-bulk-row[hidden] {
+    display: none !important;
+}
+.com-jtseo-dashboard .jtseo-dashboard-tabs-card {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--body-bg, #fff);
+}
+.com-jtseo-dashboard .jtseo-dashboard-tabs .nav-link {
+    font-weight: 600;
+}
+.com-jtseo-dashboard .jtseo-tab-pane {
+    display: none;
+}
+.com-jtseo-dashboard .jtseo-tab-pane.is-active {
+    display: block;
+}
+.com-jtseo-dashboard .jtseo-tab-pane > .card:first-child,
+.com-jtseo-dashboard .jtseo-tab-pane > .row:first-child {
+    margin-top: 0 !important;
+}
+.com-jtseo-dashboard .jtseo-tab-pane > .card:last-child,
+.com-jtseo-dashboard .jtseo-tab-pane > .row:last-child {
+    margin-bottom: 0 !important;
+}
+
+.com-jtseo-dashboard .jtseo-structured-preview {
+    max-height: 34rem;
+    overflow: auto;
+    white-space: pre;
+    font-size: .8125rem;
+}
+.com-jtseo-dashboard .jtseo-structured-mapping-table td {
+    vertical-align: middle;
+}
+
+/* Joomla/Atum native Bootstrap tab layout and overflow safety. */
+.com-jtseo-dashboard {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+    .com-jtseo-dashboard {
+        overflow-x: hidden;
+    }
+}
+
+.com-jtseo-dashboard .jtseo-dashboard-tabs {
+    max-width: 100%;
+}
+
+.com-jtseo-dashboard .jtseo-dashboard-tabs .nav-link {
+    font-weight: 600;
+}
+
+.com-jtseo-dashboard .jtseo-dashboard-tab-content,
+.com-jtseo-dashboard .tab-pane,
+.com-jtseo-dashboard .row,
+.com-jtseo-dashboard .card,
+.com-jtseo-dashboard .card-body,
+.com-jtseo-dashboard .table-responsive,
+.com-jtseo-dashboard .jtseo-bulk-list,
+.com-jtseo-dashboard .jtseo-404-list,
+.com-jtseo-dashboard .jtseo-404-item,
+.com-jtseo-dashboard .jtseo-404-main {
+    max-width: 100%;
+    min-width: 0;
+}
+
+.com-jtseo-dashboard .tab-pane > .card:first-child,
+.com-jtseo-dashboard .tab-pane > .row:first-child {
+    margin-top: 0 !important;
+}
+
+.com-jtseo-dashboard .tab-pane > .card:last-child,
+.com-jtseo-dashboard .tab-pane > .row:last-child {
+    margin-bottom: 0 !important;
+}
+
+.com-jtseo-dashboard pre,
+.com-jtseo-dashboard code {
+    max-width: 100%;
+}
+
+.com-jtseo-dashboard .jtseo-structured-preview {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.com-jtseo-dashboard .jtseo-url-cell,
+.com-jtseo-dashboard .jtseo-score-notes,
+.com-jtseo-dashboard .jtseo-audit-suggestion {
+    overflow-wrap: anywhere;
+}
+
+
+/* 1.0.50: Use Joomla core UI tabs and prevent Structured Data JSON from creating page-level horizontal scroll. */
+.com-jtseo-dashboard {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.com-jtseo-dashboard joomla-tab,
+.com-jtseo-dashboard joomla-tab > div,
+.com-jtseo-dashboard joomla-tab > section,
+.com-jtseo-dashboard .jtseo-structured-card,
+.com-jtseo-dashboard .jtseo-structured-row,
+.com-jtseo-dashboard .jtseo-structured-mapping-column,
+.com-jtseo-dashboard .jtseo-structured-preview-column {
+    max-width: 100%;
+    min-width: 0;
+}
+
+.com-jtseo-dashboard .row > [class^="col"],
+.com-jtseo-dashboard .row > [class*=" col"] {
+    min-width: 0;
+}
+
+.com-jtseo-dashboard .jtseo-structured-preview-column {
+    overflow-x: hidden;
+}
+
+.com-jtseo-dashboard .jtseo-structured-preview {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: 36rem;
+    overflow: auto;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    font-size: .8125rem;
+}
+
+.com-jtseo-dashboard .jtseo-structured-preview code {
+    display: block;
+    max-width: 100%;
+    white-space: inherit;
+    overflow-wrap: inherit;
+    word-break: inherit;
+}
+
+
+/* 1.0.53: Keep long JSON-LD preview inside a Joomla/Bootstrap accordion and improve 404 quick redirect spacing. */
+.com-jtseo-dashboard .jtseo-json-accordion,
+.com-jtseo-dashboard .jtseo-json-accordion .accordion-item,
+.com-jtseo-dashboard .jtseo-json-accordion .accordion-body {
+    max-width: 100%;
+    min-width: 0;
+}
+
+.com-jtseo-dashboard .jtseo-json-accordion .accordion-button {
+    font-weight: 600;
+}
+
+.com-jtseo-dashboard .jtseo-structured-preview {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: 32rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    font-size: .8125rem;
+}
+
+.com-jtseo-dashboard .jtseo-structured-preview code {
+    display: block;
+    max-width: 100%;
+    white-space: inherit;
+    overflow-wrap: inherit;
+    word-break: inherit;
+}
+
+.com-jtseo-dashboard .jtseo-404-action-form {
+    display: block !important;
+    width: 100%;
+    min-width: 0;
+}
+
+.com-jtseo-dashboard .jtseo-404-action-form .row {
+    max-width: 100%;
+}
+
+.com-jtseo-dashboard .jtseo-404-action-form .form-label {
+    margin-bottom: .35rem;
+    font-weight: 600;
+}
+
+.com-jtseo-dashboard .jtseo-404-action-form .form-control,
+.com-jtseo-dashboard .jtseo-404-action-form .form-select {
+    min-width: 0;
+}
+
+.com-jtseo-dashboard .jtseo-404-status {
+    min-width: 0;
+}
+
+.com-jtseo-dashboard .jtseo-404-submit {
+    white-space: nowrap;
+}
+
+.com-jtseo-dashboard .jtseo-details-summary,
+.com-jtseo-dashboard .jtseo-bulk-advanced > summary {
+    cursor: pointer;
+    list-style: none;
+}
+.com-jtseo-dashboard .jtseo-details-summary::-webkit-details-marker,
+.com-jtseo-dashboard .jtseo-bulk-advanced > summary::-webkit-details-marker {
+    display: none;
+}
+.com-jtseo-dashboard .jtseo-details-summary {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: .5rem;
+    align-items: center;
+    padding: .75rem 1rem;
+    border: 1px solid var(--border-color, #dfe3e7);
+    border-radius: .375rem;
+    background: var(--body-bg, #fff);
+    font-weight: 600;
+}
+.com-jtseo-dashboard .jtseo-bulk-advanced > summary {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    color: var(--link-color, #2a69b8);
+    font-weight: 600;
+}
+.com-jtseo-dashboard .jtseo-bulk-advanced > summary::before,
+.com-jtseo-dashboard .jtseo-details-summary::before {
+    content: "▸";
+    display: inline-block;
+    transition: transform .15s ease-in-out;
+}
+.com-jtseo-dashboard .jtseo-bulk-advanced[open] > summary::before,
+.com-jtseo-dashboard details[open] > .jtseo-details-summary::before {
+    transform: rotate(90deg);
+}
+.com-jtseo-dashboard .jtseo-bulk-item .form-label {
+    font-size: .85rem;
+    margin-bottom: .25rem;
+}
+.com-jtseo-dashboard .jtseo-bulk-item textarea {
+    min-height: 4.25rem;
+}
+.com-jtseo-dashboard .jtseo-bulk-pagination .pagination {
+    flex-wrap: wrap;
+}
+.com-jtseo-dashboard .jtseo-bulk-item .is-changed {
+    border-color: var(--success, #457d54);
+    box-shadow: 0 0 0 .15rem rgba(69, 125, 84, .15);
+}
+
+/* 1.0.56: Keep Bulk Meta Manager filter action buttons readable on Joomla/Atum layouts. */
+.com-jtseo-dashboard .jtseo-bulk-filter-bar .btn {
+    white-space: nowrap;
+    overflow-wrap: normal;
+    word-break: normal;
+    min-height: 2.625rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.com-jtseo-dashboard .jtseo-bulk-search-action,
+.com-jtseo-dashboard .jtseo-bulk-reset-action {
+    min-width: 0;
+}
+
+@media (min-width: 1200px) {
+    .com-jtseo-dashboard .jtseo-bulk-search-action .btn {
+        min-width: 7rem;
+    }
+}

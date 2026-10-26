@@ -23,4 +23,9 @@ Doğrulama: Joomla 6.2.0, PHP 8.4.27, MariaDB 11.4.
 Bu kontroller belirtilen akışları doğrular; mümkün olan tüm Joomla şablon ve üçüncü taraf eklenti birleşimleri test edilmedi.
 Kurulum: Joomla yönetiminde Sistem > Kurulum > Eklentiler üzerinden ZIP'i yükleyin.
 1.0.68'i kaldırmak gerekmez; paket güncelleme olarak yüklenir.
-GitHub'a release veya yorum yayımlanmadı.
+Resmi sürüm: https://github.com/joomtheme/JT-SEO-Control-Center/releases/tag/v1.0.69
+Yayımlanan ZIP'in SHA-256 değeri güncelleme XML'i ve SHA256SUMS.txt ile eşleşiyor.
+
+Kaynaklar depoya eklendikten sonra 6 paket/sürüm doğrulama testi geçti.
+Bileşen ve eklenti kaynakları yayımlanan ZIP içindeki çalışma dosyalarıyla birebir eşleşiyor.
+Kaynak derlemesi güncel paket README'sini içerdiği için arşiv hash'i yayımlanan ZIP'ten farklı olabilir.

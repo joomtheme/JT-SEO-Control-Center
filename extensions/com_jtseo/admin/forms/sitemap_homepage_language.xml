@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field
+        name="language"
+        type="sql"
+        query="SELECT lang_code AS value, title_native AS text FROM #__languages WHERE published = 1 ORDER BY ordering ASC, lang_code ASC"
+        key_field="value"
+        value_field="text"
+        required="true"
+        label="COM_JTSEO_SITEMAP_LANGUAGE_LABEL" />
+    <field
+        name="changefreq"
+        type="list"
+        default="daily"
+        label="COM_JTSEO_SITEMAP_CHANGEFREQ_LABEL">
+        <option value="always">COM_JTSEO_CHANGEFREQ_ALWAYS</option>
+        <option value="hourly">COM_JTSEO_CHANGEFREQ_HOURLY</option>
+        <option value="daily">COM_JTSEO_CHANGEFREQ_DAILY</option>
+        <option value="weekly">COM_JTSEO_CHANGEFREQ_WEEKLY</option>
+        <option value="monthly">COM_JTSEO_CHANGEFREQ_MONTHLY</option>
+        <option value="yearly">COM_JTSEO_CHANGEFREQ_YEARLY</option>
+        <option value="never">COM_JTSEO_CHANGEFREQ_NEVER</option>
+    </field>
+    <field
+        name="priority"
+        type="number"
+        default="1.0"
+        min="0"
+        max="1"
+        step="0.1"
+        label="COM_JTSEO_SITEMAP_PRIORITY_LABEL" />
+    <field
+        name="lastmod"
+        type="calendar"
+        format="%Y-%m-%d"
+        filter="user_utc"
+        showtime="false"
+        todaybutton="true"
+        filltable="true"
+        label="COM_JTSEO_SITEMAP_LASTMOD_OVERRIDE_LABEL"
+        description="COM_JTSEO_SITEMAP_LASTMOD_OVERRIDE_DESC" />
+</form>

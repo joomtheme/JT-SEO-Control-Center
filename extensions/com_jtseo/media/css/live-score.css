@@ -1,0 +1,71 @@
+.jtseo-live-score-card {
+    border: 1px solid var(--border-color, #dfe3e7);
+    border-radius: .5rem;
+    padding: 1rem;
+    margin: .5rem 0 1rem;
+    background: var(--body-bg, #fff);
+}
+.jtseo-live-score-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: .75rem;
+}
+.jtseo-live-score-title {
+    font-weight: 700;
+    margin: 0 0 .25rem;
+}
+.jtseo-live-score-subtitle {
+    margin: 0;
+    color: var(--text-muted, #6c757d);
+    font-size: .875rem;
+}
+.jtseo-live-score-badge {
+    border-radius: .35rem;
+    padding: .35rem .55rem;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+}
+.jtseo-live-score-badge.is-excellent { background: #198754; }
+.jtseo-live-score-badge.is-good { background: #0d6efd; }
+.jtseo-live-score-badge.is-fair { background: #ffc107; color: #111; }
+.jtseo-live-score-badge.is-weak { background: #dc3545; }
+.jtseo-live-score-track {
+    height: .65rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, .1);
+    overflow: hidden;
+    margin-bottom: .75rem;
+}
+.jtseo-live-score-bar {
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: #dc3545;
+    transition: width .2s ease;
+}
+.jtseo-live-score-bar.is-excellent { background: #198754; }
+.jtseo-live-score-bar.is-good { background: #0d6efd; }
+.jtseo-live-score-bar.is-fair { background: #ffc107; }
+.jtseo-live-score-bar.is-weak { background: #dc3545; }
+.jtseo-live-score-notes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+    margin-bottom: .65rem;
+}
+.jtseo-live-score-note {
+    display: inline-block;
+    border: 1px solid var(--border-color, #dfe3e7);
+    background: var(--template-bg-light, #f6f8fa);
+    border-radius: .35rem;
+    padding: .25rem .45rem;
+    font-size: .8125rem;
+    font-weight: 600;
+}
+.jtseo-live-score-meta {
+    color: var(--text-muted, #6c757d);
+    font-size: .875rem;
+}

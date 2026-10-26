@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field
+        name="language"
+        type="sql"
+        query="SELECT lang_code AS value, title_native AS text FROM #__languages WHERE published = 1 ORDER BY ordering ASC, lang_code ASC"
+        key_field="value"
+        value_field="text"
+        required="true"
+        label="COM_JTSEO_SCHEMA_LANGUAGE_LABEL" />
+    <field
+        name="name"
+        type="text"
+        maxlength="255"
+        filter="string"
+        label="COM_JTSEO_SCHEMA_NAME_LABEL" />
+    <field
+        name="website_name"
+        type="text"
+        maxlength="255"
+        filter="string"
+        label="COM_JTSEO_SCHEMA_WEBSITE_NAME_LABEL" />
+    <field
+        name="alternate_name"
+        type="text"
+        maxlength="255"
+        filter="string"
+        label="COM_JTSEO_SCHEMA_ALTERNATE_NAME_LABEL" />
+    <field
+        name="description"
+        type="textarea"
+        rows="3"
+        maxlength="500"
+        filter="string"
+        label="COM_JTSEO_SCHEMA_DESCRIPTION_LABEL" />
+    <field
+        name="logo"
+        type="media"
+        directory="images"
+        preview="true"
+        label="COM_JTSEO_SCHEMA_LOGO_LABEL" />
+    <field
+        name="email"
+        type="email"
+        filter="email"
+        label="COM_JTSEO_SCHEMA_EMAIL_LABEL" />
+    <field
+        name="telephone"
+        type="tel"
+        filter="string"
+        label="COM_JTSEO_SCHEMA_TELEPHONE_LABEL" />
+    <field
+        name="street_address"
+        type="text"
+        maxlength="255"
+        filter="string"
+        label="COM_JTSEO_SCHEMA_STREET_ADDRESS_LABEL" />
+    <field
+        name="address_locality"
+        type="text"
+        maxlength="255"
+        filter="string"
+        label="COM_JTSEO_SCHEMA_ADDRESS_LOCALITY_LABEL" />
+    <field
+        name="address_region"
+        type="text"
+        maxlength="255"
+        filter="string"
+        label="COM_JTSEO_SCHEMA_ADDRESS_REGION_LABEL" />
+    <field
+        name="postal_code"
+        type="text"
+        maxlength="32"
+        filter="string"
+        label="COM_JTSEO_SCHEMA_POSTAL_CODE_LABEL" />
+    <field
+        name="address_country"
+        type="text"
+        maxlength="64"
+        filter="string"
+        label="COM_JTSEO_SCHEMA_ADDRESS_COUNTRY_LABEL" />
+</form>

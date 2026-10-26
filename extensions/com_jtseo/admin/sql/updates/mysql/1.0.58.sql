@@ -1,0 +1,2 @@
+-- JT SEO Control Center 1.0.58
+-- Code-only update: no database schema changes.

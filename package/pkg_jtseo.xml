@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="package" version="6.0" method="upgrade">
+    <name>JT SEO Control Center</name>
+    <packagename>jtseo</packagename>
+    <author>JoomTheme</author>
+    <creationDate>2026-10-26</creationDate>
+    <copyright>(C) 2026 JoomTheme. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <authorEmail>support@joomtheme.com</authorEmail>
+    <authorUrl>https://joomtheme.com</authorUrl>
+    <version>1.0.69</version>
+    <url>https://joomtheme.com</url>
+    <packager>JoomTheme</packager>
+    <packagerurl>https://joomtheme.com</packagerurl>
+    <description>PKG_JTSEO_XML_DESCRIPTION</description>
+    <blockChildUninstall>true</blockChildUninstall>
+    <scriptfile>script.php</scriptfile>
+
+    <files folder="packages">
+        <file type="component" id="com_jtseo">com_jtseo.zip</file>
+        <file type="plugin" id="jtseo" group="system">plg_system_jtseo.zip</file>
+        <file type="plugin" id="jtseo" group="content">plg_content_jtseo.zip</file>
+    </files>
+
+    <languages folder="language">
+        <language tag="en-GB">en-GB/pkg_jtseo.sys.ini</language>
+        <language tag="en-GB">en-GB/jtseocontrolcenter.sys.ini</language>
+        <language tag="tr-TR">tr-TR/pkg_jtseo.sys.ini</language>
+        <language tag="tr-TR">tr-TR/jtseocontrolcenter.sys.ini</language>
+    </languages>
+    <changelogurl>https://raw.githubusercontent.com/joomtheme/JT-SEO-Control-Center/main/updates/changelog.xml</changelogurl>
+
+    <updateservers>
+        <server type="extension" priority="1" name="JT SEO Control Center">https://raw.githubusercontent.com/joomtheme/JT-SEO-Control-Center/main/updates/update.xml</server>
+    </updateservers>
+
+</extension>

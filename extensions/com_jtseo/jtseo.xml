@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" version="6.0" method="upgrade">
+    <name>JT SEO Control Center</name>
+    <author>JoomTheme</author>
+    <creationDate>2026-10-26</creationDate>
+    <copyright>(C) 2026 JoomTheme. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <authorEmail>support@joomtheme.com</authorEmail>
+    <authorUrl>https://joomtheme.com</authorUrl>
+    <version>1.0.69</version>
+    <description>COM_JTSEO_XML_DESCRIPTION</description>
+    <element>com_jtseo</element>
+    <namespace path="src">JoomTheme\Component\Jtseo</namespace>
+    <scriptfile>script.php</scriptfile>
+
+
+    <files folder="site">
+        <folder>services</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+    <languages folder="site/language">
+        <language tag="en-GB">en-GB/com_jtseo.ini</language>
+        <language tag="tr-TR">tr-TR/com_jtseo.ini</language>
+    </languages>
+
+    <administration>
+        <menu view="dashboard" img="class:icon-search">COM_JTSEO</menu>
+        <files folder="admin">
+            <folder>forms</folder>
+            <folder>services</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <folder>sql</folder>
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+        </files>
+        <languages folder="admin/language">
+            <language tag="en-GB">en-GB/com_jtseo.ini</language>
+            <language tag="en-GB">en-GB/com_jtseo.sys.ini</language>
+            <language tag="tr-TR">tr-TR/com_jtseo.ini</language>
+            <language tag="tr-TR">tr-TR/com_jtseo.sys.ini</language>
+        </languages>
+    </administration>
+
+    <media folder="media" destination="com_jtseo">
+        <folder>css</folder>
+        <folder>js</folder>
+        <folder>xsl</folder>
+        <filename>joomla.asset.json</filename>
+    </media>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
+</extension>

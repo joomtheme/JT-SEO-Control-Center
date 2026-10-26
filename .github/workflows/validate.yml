@@ -1,0 +1,31 @@
+name: Validate source and package
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: none
+          coverage: none
+      - name: Validate release metadata and package contents
+        run: python3 -m unittest discover -s tests -v
+      - name: Check PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          find extensions package -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Build installation package
+        run: python3 tools/build.py

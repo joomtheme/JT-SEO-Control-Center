@@ -3,7 +3,8 @@
 JT SEO Control Center is an administrator-focused Joomla extension.
 For security reasons, a public Joomla administrator login demo is not provided.
 
-This page provides a visual walkthrough of the main administrator features available in JT SEO Control Center 1.0.66.
+This page provides a visual walkthrough of the main administrator features available in JT SEO Control Center.
+Screenshots illustrate the workflows; their layout may vary from the current release.
 
 ## Dashboard
 
@@ -40,7 +41,7 @@ Supported redirect status codes include 301, 302, 307, 308 and 410 Gone.
 
 ## Structured Data
 
-JT SEO Control Center 1.0.66 adds frontend JSON-LD Structured Data generation for Joomla pages.
+JT SEO Control Center provides frontend JSON-LD Structured Data generation for Joomla pages.
 
 Supported Schema types include:
 

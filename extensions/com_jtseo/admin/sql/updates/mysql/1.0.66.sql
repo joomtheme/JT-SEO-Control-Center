@@ -1,0 +1,2 @@
+-- JT SEO Control Center 1.0.66 schema marker.
+-- Frontend structured data and multilingual schema configuration release; no database schema changes.

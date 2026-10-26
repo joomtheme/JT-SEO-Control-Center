@@ -1,0 +1,2 @@
+-- JT SEO Control Center 1.0.59
+-- Runtime 404 provisional logging reliability update; no database schema changes.

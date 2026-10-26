@@ -1,5 +1,26 @@
 # JT SEO Control Center
 
+**Current release: [v1.0.69](https://github.com/joomtheme/JT-SEO-Control-Center/releases/tag/v1.0.69)**
+
+[Download the Joomla installation package](https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v1.0.69/pkg_jtseo_v1.0.69.zip)
+· [Visual walkthrough](docs/demo/README.md)
+· [Changelog](updates/changelog.xml)
+
+## Current Release
+
+Version **1.0.69** restores the JT SEO fields in Joomla article editing and
+corrects the JavaScript/CSS paths used by the dashboard and live SEO score.
+It enables the required plugins on new installations while preserving
+administrator-selected plugin states during upgrades.
+
+The package passed JED Checker and was tested with Joomla 6.2.0 / PHP 8.4.27,
+including installation, upgrades, article SEO saving, frontend metadata and
+`noindex` sitemap filtering. See the [validation report](downloads/TEST-REPORT.md).
+
+```text
+SHA-256: 3c83151265975c92d960713031d1c0cd68720e254c2534f50f0df513d687e60d
+```
+
 **JT SEO Control Center** is a Joomla SEO management package for Joomla
 6. It helps site owners, administrators, and developers audit SEO
 issues, manage article metadata, generate XML sitemaps, manage
@@ -66,7 +87,7 @@ The package includes:
 ## Requirements
 
 -   Joomla 6.x
--   PHP version supported by the installed Joomla 6 environment
+-   PHP 8.3 or later, supported by the installed Joomla 6 environment
 -   MySQL/MariaDB database supported by Joomla
 -   Joomla administrator access
 -   Writable Joomla root folder if physical `sitemap.xml` generation is
@@ -81,7 +102,7 @@ JT SEO Control Center is distributed as a Joomla package extension.
 Install this file through Joomla:
 
 ``` text
-pkg_jtseo_v1.0.68.zip
+pkg_jtseo_v1.0.69.zip
 ```
 
 The package installs the following child extensions:
@@ -403,6 +424,12 @@ If the Joomla root folder is not writable, physical sitemap generation
 may fail. The dashboard system status will warn about this.
 
 ------------------------------------------------------------------------
+
+### Chrome XSLT notice
+
+Chrome may display an XSLT deprecation notice when opening a sitemap. The
+stylesheet controls browser presentation; the sitemap XML remains available
+for search engines. Version 1.0.69 still uses XSLT for the browser table.
 
 ### Multilingual Sitemap Support
 
@@ -727,7 +754,7 @@ dashboard displays a warning.
 3.  Upload the package ZIP file:
 
 ``` text
-pkg_jtseo_v1.0.68.zip
+pkg_jtseo_v1.0.69.zip
 ```
 
 4.  Wait for Joomla to complete the package installation.
@@ -735,8 +762,9 @@ pkg_jtseo_v1.0.68.zip
 6.  Open the **System Status** section.
 7.  Confirm that the required plugins and database tables are healthy.
 
-The package attempts to enable the required JT SEO plugins automatically
-after installation or update.
+A fresh installation enables both JT SEO plugins automatically. Updates preserve
+existing plugin states. If a required plugin is disabled, enable it through
+**System → Manage → Plugins** before testing its features.
 
 ------------------------------------------------------------------------
 
@@ -1337,275 +1365,44 @@ Components → JT SEO Control Center → System Status
 
 ------------------------------------------------------------------------
 
-## Version 1.0.68
+## Development
 
-### Release Type
+The repository includes the complete component, both plugins and the package
+installer for the current release.
 
-Article fallback and Joomla core Schema.org integration regression fixes for
-Joomla 6.
+| Path | Contents |
+| --- | --- |
+| `extensions/com_jtseo/` | Joomla administrator/site component, SQL migrations and media assets |
+| `extensions/plg_system_jtseo/` | Frontend SEO, structured data, sitemap, redirect and 404 plugin |
+| `extensions/plg_content_jtseo/` | Article SEO fields and live score plugin |
+| `package/` | Package manifest, installer, language files and license |
+| `tools/build.py` | Reproducible source-package builder using the Python standard library |
+| `tests/` | Release metadata, archive integrity and source validation |
+| `updates/` | Joomla update feed and changelog |
+| `downloads/` | Published installation ZIP, checksum and validation report |
 
-### Changes
+From the repository root, use **Python 3.9 or newer**:
 
--   Fixed fallback `Article` JSON-LD being suppressed when another structured
-    data node only referenced the Article `@id` without declaring the Article
-    entity itself.
--   Improved Joomla article detection for SEF and multilingual Single Article
-    menu routes where late rendering events may no longer expose the routed
-    article `view` or `id` directly.
--   Preserved explicitly selected Joomla core item schemas such as `Book`,
-    `Event` and `Recipe` instead of replacing them with a fallback `Article`.
--   Restored the selected Joomla core item schema from Joomla's `#__schemaorg`
-    record when the base graph exists but the item-level node is missing from
-    the rendered JSON-LD.
--   Updated `WebPage.mainEntity` to reference the preserved Joomla item-level
-    schema entity when a custom core type is selected.
--   Continued enriching Joomla-rendered `Article`, `NewsArticle` and
-    `BlogPosting` nodes with multilingual identity, absolute media URLs and
-    publication / modification dates.
--   Added a database update marker for version `1.0.68`.
--   Updated package, component, plugin, asset and health-check versions to
-    `1.0.68`.
+```sh
+python3 -m unittest discover -s tests -v
+python3 tools/build.py
+```
 
-### Joomla core Schema.org compatibility
+The build creates `dist/pkg_jtseo_v1.0.69.zip`, including all three child
+extensions. Install the generated package through Joomla to test source
+changes. The standard-library checks validate the update feed and release
+checksum, all manifest references, consistent versions, unchanged published
+runtime files and reproducible builds. GitHub Actions also checks PHP syntax
+with PHP 8.3.
 
-Joomla core Schema.org support may remain enabled. JT SEO now respects the
-item-level schema selected for an article and preserves custom types such as
-`Book` rather than generating a competing fallback `Article`.
+The SHA-256 above identifies the published release asset. Source builds
+include the current package README, so their archive checksum can differ
+while containing the same extension code. Keep the published ZIP and its
+update-feed checksum together; do not replace a release asset with a
+development build without updating the release metadata.
 
-When Joomla core Schema.org output is unavailable or disabled, JT SEO continues
-to generate its own `Organization` / `LocalBusiness`, `WebSite`, `WebPage` and
-`Article` graph for Joomla article pages.
-
-------------------------------------------------------------------------
-
-## Previous Version 1.0.67
-
-### Release Type
-
-Joomla Schema compatibility and multilingual structured-data fixes for Joomla 6.
-
-### Changes
-
--   Fixed Joomla Article `datePublished` to use the real Joomla publication date
-    and fall back to the created date when necessary.
--   Fixed `dateModified` to use the real Joomla modification date and fall back
-    to `datePublished` when necessary.
--   Fixed relative Schema image and logo URLs that could resolve below
-    multilingual paths such as `/en/products/images/...` and return 404 errors.
--   Added a dedicated global and language-specific website name for
-    `WebSite.name` and `og:site_name`.
--   Separated Organization / LocalBusiness name from website name in
-    multilingual structured-data identity settings.
--   Improved Joomla core Schema.org compatibility by enhancing the native graph
-    in place when it is available.
--   Prevented JT SEO from publishing a competing `Article` / `WebPage` JSON-LD
-    graph when the Joomla core Schema.org graph is detected.
--   Kept SP Page Builder and other non-article component pages as `WebPage`
-    structured data without synthetic Article publication / modification dates.
--   Added a database update marker for version `1.0.67`.
--   Updated package, component, plugin, asset and health-check versions to
-    `1.0.67`.
-
-### Joomla core Schema.org compatibility
-
-Joomla core Schema.org support may remain enabled. JT SEO detects the native
-Joomla graph and enhances it with configured multilingual identity values,
-absolute media URLs and Joomla Article publication / modification dates.
-
-If Joomla core Schema output is unavailable, JT SEO continues to generate its
-own JSON-LD graph.
-
-### Template Microdata note
-
-JSON-LD duplicate protection cannot safely remove Article Microdata embedded
-in a template with `itemscope`, `itemtype` and `itemprop`. If a template creates
-an additional Article Microdata entity, remove that Article Microdata when
-Joomla / JT SEO JSON-LD Article output is being used.
-
-------------------------------------------------------------------------
-
-## Previous Version 1.0.66
-
-### Release Type
-
-Frontend structured data, homepage Schema and multilingual Schema release for
-Joomla 6.
-
-### Changes
-
--   Added frontend Schema.org JSON-LD output.
--   Added homepage site identity Schema with `Organization` and
-    `LocalBusiness` options.
--   Added `WebSite` and `WebPage` structured data output.
--   Added generic `WebPage` Schema support for SP Page Builder and other
-    non-article Joomla component pages.
--   Added multilingual Schema identity configuration based on active Joomla
-    language tags such as `en-GB`, `de-DE` and `tr-TR`.
--   Added language-specific overrides for organization name, alternate name,
-    description, logo, email, telephone and postal address fields.
--   Added `Article` JSON-LD with `datePublished` and `dateModified`.
--   Added Joomla article author, category, image and page relationship data to
-    Article structured data when available.
--   Added `ImageObject` output for suitable structured data images.
--   Added existing JSON-LD detection to reduce duplicate Schema output when
-    templates, page builders or other extensions already generate structured
-    data.
--   Improved `og:site_name` to use the active language-specific organization
-    name when configured.
--   Added organization logo support through the standard Schema.org `logo`
-    property and standard `og:image` fallback handling instead of the
-    non-standard `og:logo` property.
--   Updated the Structured Data dashboard preview to reflect frontend output.
--   Added database update marker for version `1.0.66`.
--   Updated package, component and plugin versions to `1.0.66`.
--   Verified package compatibility with JED Checker.
-
-------------------------------------------------------------------------
-
-## Previous Version 1.0.65.3
-
-### Release Type
-
-Multilingual sitemap wildcard filtering and package compatibility hotfix
-for Joomla 6.
-
-### Changes
-
--   Fixed wildcard Excluded URLs rules such as `/mycotoxin/*` on
-    multilingual Joomla websites.
--   Improved matching of language-prefixed generated URLs such as
-    `/en/mycotoxin/...` and `/tr/mycotoxin/...`.
--   Preserved language-specific filtering through explicit URL language
-    prefixes such as `/en/mycotoxin/*`.
--   Fixed child URLs remaining in sitemap output when their multilingual
-    parent path matched an exclusion wildcard.
--   Fixed package manifest version reporting.
--   Fixed invalid or missing package-level file references reported by JED
-    Checker.
--   Improved Joomla Extension Directory package compatibility.
--   Updated package, component, plugin and asset versions to `1.0.65.3`.
--   Verified Included URLs and Excluded URLs behavior through multilingual
-    community testing.
-
-------------------------------------------------------------------------
-
-## Previous Version 1.0.65.2
-
-### Release Type
-
-Advanced sitemap improvements, image sitemap integration and URL
-filtering improvements for Joomla 6.
-
-### Changes
-
--   Added XML image sitemap support for articles and categories.
--   Added article image detection from Joomla Images and Links fields.
--   Added article content image detection from embedded HTML images.
--   Added image count display in the sitemap browser stylesheet.
--   Added global Included URLs rules for preserving matching generated
-    sitemap URLs.
--   Added global Excluded URLs configuration for manually removing
-    sitemap URLs.
--   Added wildcard support for URL exclusions such as `/tag/*`.
--   Improved sitemap image handling with support for multiple images per
-    URL.
--   Improved sitemap URL filtering and normalization logic.
--   Improved Joomla 6 routing compatibility.
--   Fixed missing article images in XML sitemap output.
--   Fixed article content image extraction from `<img>` HTML elements.
--   Fixed sitemap filtering edge cases for excluded parent paths and
-    child URLs.
--   Fixed JED Checker compatibility issue related to URL decoding
-    patterns.
--   Updated package, component, plugin and asset versions to `1.0.65.2`.
--   Added database update marker for version `1.0.65.2`.
-
-------------------------------------------------------------------------
-
-## Version 1.0.64
-
-### Release Type
-
-Multilingual sitemap index, sitemap pagination and noindex menu
-exclusion release for Joomla 6.
-
-### Changes
-
--   Added multilingual sitemap index support with language-specific
-    sitemap files.
--   Added paginated sitemap output for large multilingual websites.
--   Added sitemap files using language tags and page indexes, such as
-    `sitemap.tr-TR.1.xml` and `sitemap.en-GB.1.xml`.
--   Added a maximum links per sitemap file setting for sitemap
-    pagination.
--   Changed `sitemap.xml` to serve as a master sitemap index when
-    multilingual sitemap output is enabled.
--   Improved sitemap index output to include language-specific paginated
-    sitemap files.
--   Fixed sitemap exclusion for Joomla menu items with robots settings
-    containing `noindex`.
--   Fixed sitemap generation so noindex menu paths and their child URLs
-    are excluded from sitemap output.
--   Fixed tag menu sitemap leakage when a tag menu path such as `/tag`
-    is marked as `noindex`.
--   Fixed missing XML stylesheet display for SEF `sitemap.xml` output.
--   Improved cleanup of old generated sitemap files during installation
-    and updates.
--   Updated package, component, plugin and asset versions to `1.0.64`.
--   Added database update marker for version `1.0.64`.
-
-------------------------------------------------------------------------
-
-## Previous Version 1.0.63
-
-### Release Type
-
-Multilingual sitemap support release for Joomla 6.
-
-### Changes
-
--   Added multilingual sitemap support for Joomla websites using
-    multiple content languages.
--   Added sitemap index output for multilingual websites via
-    `sitemap.xml`.
--   Added dedicated sitemap output for each published content language.
--   Improved sitemap generation to respect Joomla content language
-    values.
--   Improved article URL generation by using language-aware Joomla
-    routing.
--   Added a new multilingual sitemap configuration option.
--   Updated package, component and plugin versions to `1.0.63`.
--   Added database update marker for version `1.0.63`.
--   Improved sitemap compatibility for multilingual Joomla websites.
--   Added multilingual sitemap support based on community feedback from
-    GitHub user `@niaziblog`.
-
-------------------------------------------------------------------------
-
-## Previous Version 1.0.62
-
-### Release Type
-
-JED-ready stable release for Joomla 6.
-
-### Changes
-
--   Improved Bulk Meta Manager user interface.
--   Added default **Needs attention** filter for low-score articles.
--   Added pagination options for Bulk Meta Manager.
--   Collapsed CSV Import / Export tools for a cleaner default view.
--   Moved advanced metadata fields into an expandable section.
--   Improved Bulk Meta Manager button layout and responsive behavior.
--   Optimized 404 logging to avoid unnecessary database writes on normal
-    frontend page views.
--   Added privacy-friendly 404 logging options for query strings,
-    referrers and user agents.
--   Improved JED listing/profile URL handling.
--   Updated package, component and plugin versions to `1.0.62`.
--   Improved Joomla 6 and JED readiness.
--   Improved English and Turkish language strings.
--   Added database update marker for version `1.0.62`.
--   Improved package integrity for Joomla Extension Directory review.
+Retain the complete SQL update chain when preparing a release so existing
+Joomla installations can migrate their database schema.
 
 ------------------------------------------------------------------------
 
@@ -1615,9 +1412,7 @@ GNU General Public License version 2 or later.
 
 See:
 
-``` text
-LICENSE.txt
-```
+[LICENSE](LICENSE)
 
 ------------------------------------------------------------------------
 

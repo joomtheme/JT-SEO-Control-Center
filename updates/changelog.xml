@@ -3,6 +3,34 @@
     <changelog>
         <element>pkg_jtseo</element>
         <type>package</type>
+        <version>1.0.69</version>
+
+        <addition>
+            <item>Added a package installer that enables the system and content plugins on fresh installations while preserving administrator-selected plugin states during upgrades.</item>
+            <item>Added a database update marker for version 1.0.69 without changing the database structure.</item>
+        </addition>
+
+        <change>
+            <item>Load the article SEO form XML by its absolute filename and add live score assets only after the form loads successfully.</item>
+            <item>Preserve compatibility with generic content form events using subject, form or positional arguments.</item>
+            <item>Updated package, component, plugin, asset and health-check versions to 1.0.69.</item>
+        </change>
+
+        <fix>
+            <item>Fixed missing JT SEO article fields on Joomla 6 by reading the form through PrepareFormEvent::getForm(), resolving issue #6.</item>
+            <item>Fixed dashboard and live SEO score JavaScript and CSS files not loading because of incorrect Joomla Web Asset paths.</item>
+            <item>Fixed required JT SEO plugins remaining disabled after a fresh package installation.</item>
+        </fix>
+
+        <note>
+            <item>Passed JED Checker validation. Installation, upgrades, article SEO saving, metadata and noindex sitemap filtering were tested on Joomla 6.2.0 with PHP 8.4.27.</item>
+            <item>Chrome may display an XSLT deprecation notice when viewing a sitemap. This affects browser presentation; sitemap XML generation remains unchanged.</item>
+        </note>
+    </changelog>
+
+    <changelog>
+        <element>pkg_jtseo</element>
+        <type>package</type>
         <version>1.0.68</version>
 
         <security>

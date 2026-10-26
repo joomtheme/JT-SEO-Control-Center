@@ -1,0 +1,2 @@
+-- JT SEO Control Center 1.0.64
+-- Sitemap noindex menu exclusion and multilingual sitemap index settings.
