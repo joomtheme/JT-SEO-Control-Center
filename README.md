@@ -93,6 +93,9 @@ The package includes:
 -   Writable Joomla root folder if physical `sitemap.xml` generation is
     enabled
 
+PHP 8.4 and 8.5 functional test results and the open production 503
+investigation are documented in [PHP compatibility](docs/php-compatibility.md).
+
 ------------------------------------------------------------------------
 
 ## Package Contents
@@ -1393,7 +1396,8 @@ extensions. Install the generated package through Joomla to test source
 changes. The standard-library checks validate the update feed and release
 checksum, all manifest references, consistent versions, unchanged published
 runtime files and reproducible builds. GitHub Actions also checks PHP syntax
-with PHP 8.3.
+with PHP 8.3, 8.4 and 8.5. Installed Joomla form checks can be run separately
+with `JTSEO_JOOMLA_ROOT=/path/to/joomla php tests/joomla/compatibility.php`.
 
 The SHA-256 above identifies the published release asset. Source builds
 include the current package README, so their archive checksum can differ

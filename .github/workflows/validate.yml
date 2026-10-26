@@ -10,6 +10,11 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    name: PHP ${{ matrix.php }}
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.3', '8.4', '8.5']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -17,7 +22,7 @@ jobs:
           python-version: '3.12'
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: ${{ matrix.php }}
           tools: none
           coverage: none
       - name: Validate release metadata and package contents
@@ -26,6 +31,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          find extensions package -name '*.php' -print0 | xargs -0 -n1 php -l
+          find extensions package tests -name '*.php' -print0 | xargs -0 -n1 php -l
       - name: Build installation package
         run: python3 tools/build.py
