@@ -1,6 +1,15 @@
-# JT SEO Control Center 1.0.69
+# JT SEO Control Center 1.0.70 — test package
 
-Joomla 6 article SEO fields and live score compatibility release.
+Unreleased test package for Joomla 6. The official release remains 1.0.69.
+
+To generate only menu destinations, open component Options → Sitemap, enable
+**Include menu items**, disable **Include Joomla articles**, then regenerate
+the sitemap. **Include homepage** stays independent. The new menu option is
+off by default; published public internal links follow Joomla routing and
+existing noindex, URL exclusion/include, language and deduplication rules.
+Aliases, headings, separators, external links and restricted/unpublished menu
+branches are omitted. Published menu-linked articles retain article visibility
+and noindex checks. Existing 1.0.69 fixes remain included:
 
 - Restores the JT SEO fields in Joomla article editing using the typed form event API.
 - Supports generic events with subject, form or positional arguments.

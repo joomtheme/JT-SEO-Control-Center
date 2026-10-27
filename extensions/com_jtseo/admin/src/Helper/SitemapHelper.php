@@ -341,13 +341,139 @@ final class SitemapHelper
             $urls = array_merge($urls, self::getArticleSitemapItems($params, $languageTag));
         }
 
+        if ((int) $params->get('sitemap_include_menu_items', 0) === 1) {
+            $urls = array_merge($urls, self::getMenuSitemapItems($params, $languageTag));
+        }
+
         $urls = array_merge($urls, self::getExplicitIncludedUrlItems($params, $languageTag));
         $urls = self::deduplicateSitemapItems($urls);
 
         return self::filterSitemapUrls($urls, $params, $languageTag);
     }
 
-    private static function getArticleSitemapItems(Registry $params, ?string $languageTag = null): array
+    /**
+     * Add public site menu destinations independently of article enumeration.
+     * Home items remain controlled by sitemap_include_homepage. Aliases,
+     * headings and separators are navigation structure, not new destinations.
+     */
+    private static function getMenuSitemapItems(Registry $params, ?string $languageTag = null): array
+    {
+        try {
+            $db = Factory::getContainer()->get(DatabaseInterface::class);
+            $now = Factory::getDate()->toSql();
+            $levels = array_values(array_unique(array_filter(
+                array_map('intval', Access::getAuthorisedViewLevels(0) ?: [1]),
+                static fn (int $level): bool => $level > 0
+            )));
+            $publicLevels = implode(',', $levels ?: [1]);
+            $query = $db->getQuery(true)
+                ->select('m.*')
+                ->from($db->quoteName('#__menu', 'm'))
+                ->where($db->quoteName('m.client_id') . ' = 0')
+                ->where($db->quoteName('m.published') . ' = 1')
+                ->where($db->quoteName('m.access') . ' IN (' . $publicLevels . ')')
+                ->where($db->quoteName('m.home') . ' = 0')
+                ->where($db->quoteName('m.type') . ' IN (' . $db->quote('component') . ',' . $db->quote('url') . ')')
+                ->order($db->quoteName('m.lft') . ' ASC');
+
+            // A public child beneath a restricted or unpublished parent is not public.
+            $unavailable = [
+                $db->quoteName('p.published') . ' <> 1',
+                $db->quoteName('p.access') . ' NOT IN (' . $publicLevels . ')',
+            ];
+            foreach (['publish_up' => '>', 'publish_down' => '<'] as $column => $operator) {
+                $field = $db->quoteName('p.' . $column);
+                $unavailable[] = '(' . $field . ' IS NOT NULL AND ' . $field . ' <> ' . $db->quote('0000-00-00 00:00:00') . ' AND ' . $field . ' ' . $operator . ' ' . $db->quote($now) . ')';
+            }
+            $ancestor = $db->getQuery(true)
+                ->select('1')
+                ->from($db->quoteName('#__menu', 'p'))
+                ->where($db->quoteName('p.lft') . ' < ' . $db->quoteName('m.lft'))
+                ->where($db->quoteName('p.rgt') . ' > ' . $db->quoteName('m.rgt'))
+                ->where($db->quoteName('p.parent_id') . ' > 0')
+                ->where('(' . implode(' OR ', $unavailable) . ')');
+            $query->where('NOT EXISTS (' . $ancestor . ')');
+
+            foreach (['publish_up' => '<=', 'publish_down' => '>='] as $column => $operator) {
+                $field = $db->quoteName('m.' . $column);
+                $query->where('(' . $field . ' IS NULL OR ' . $field . ' = ' . $db->quote('0000-00-00 00:00:00') . ' OR ' . $field . ' ' . $operator . ' ' . $db->quote($now) . ')');
+            }
+
+            if ($languageTag !== null && $languageTag !== '') {
+                $query->where($db->quoteName('m.language') . ' IN (' . $db->quote('*') . ', :jtseo_menu_language)')
+                    ->bind(':jtseo_menu_language', $languageTag);
+            }
+
+            $rows = $db->setQuery($query)->loadObjectList() ?: [];
+        } catch (\Throwable $exception) {
+            return [];
+        }
+
+        $items = [];
+        $root = rtrim(Uri::root(false), '/') . '/';
+        $homepage = self::normaliseUrlKey(self::getHomepageUrl($languageTag));
+
+        foreach ($rows as $row) {
+            $link = trim(html_entity_decode((string) ($row->link ?? ''), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+
+            // Reject external destinations, protocol-relative links and non-page schemes.
+            if ($link === '' || str_starts_with($link, '//') || str_contains($link, '\\')
+                || self::containsControlCharacter($link) || str_starts_with($link, '#')
+                || (preg_match('#^[a-z][a-z0-9+.-]*:#i', $link) === 1 && preg_match('#^https?://#i', $link) !== 1)) {
+                continue;
+            }
+
+            $absolute = self::toAbsoluteUrl($link);
+
+            if ($absolute === '' || !str_starts_with($absolute, $root)) {
+                continue;
+            }
+
+            parse_str((string) parse_url($link, PHP_URL_QUERY), $target);
+
+            if (($target['option'] ?? '') === 'com_content' && ($target['view'] ?? '') === 'article') {
+                $articleId = (int) ($target['id'] ?? 0);
+
+                // Reuse article visibility, publication, canonical and noindex rules
+                // without enumerating every article when the source is disabled.
+                if ($articleId <= 0 || self::getArticleSitemapItems($params, $languageTag, $articleId) === []) {
+                    continue;
+                }
+            }
+
+            $route = 'index.php?Itemid=' . (int) $row->id;
+            $sef = self::getLanguageSef($languageTag ?: ((string) $row->language !== '*' ? (string) $row->language : null));
+
+            if ($sef !== '') {
+                $route .= '&lang=' . rawurlencode($sef);
+            }
+
+            // URL-type items have no component router; route their actual internal link.
+            if ((string) $row->type === 'url') {
+                $route = $link;
+            }
+
+            $url = self::toRoutedUrl($route);
+
+            if ($url === '' || !str_starts_with($url, $root)
+                || self::normaliseUrlKey($url) === $homepage
+                || ((int) $params->get('sitemap_exclude_fallback_urls', 1) === 1 && self::isFallbackArticleUrl($url))) {
+                continue;
+            }
+
+            $items[] = [
+                'loc'        => $url,
+                'lastmod'    => '',
+                'changefreq' => self::normaliseChangefreq((string) $params->get('sitemap_internal_changefreq', 'weekly'), 'weekly'),
+                'priority'   => self::normalisePriority((string) $params->get('sitemap_internal_priority', '0.8'), '0.8'),
+                'images'     => [],
+            ];
+        }
+
+        return $items;
+    }
+
+    private static function getArticleSitemapItems(Registry $params, ?string $languageTag = null, ?int $articleId = null): array
     {
         try {
             /** @var DatabaseInterface $db */
@@ -396,6 +522,10 @@ final class SitemapHelper
                     ->where('(' . $db->quoteName('c.language') . ' = ' . $db->quote('*') . ' OR ' . $db->quoteName('c.language') . ' = :jtseo_category_language OR ' . $db->quoteName('c.language') . ' IS NULL)')
                     ->bind(':jtseo_language', $languageTag)
                     ->bind(':jtseo_category_language', $languageTag);
+            }
+
+            if ($articleId !== null) {
+                $query->where($db->quoteName('a.id') . ' = ' . (int) $articleId);
             }
 
             $limit = max(1, min(50000, (int) $params->get('sitemap_article_limit', 50000)));

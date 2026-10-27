@@ -31,24 +31,35 @@ class ReleaseTests(unittest.TestCase):
         cls.filename = f'pkg_jtseo_v{cls.version}.zip'
         cls.release = (ROOT / 'downloads' / cls.filename).read_bytes()
         cls.update = ET.parse(ROOT / 'updates/update.xml').getroot().find('update')
+        cls.published_version = cls.update.findtext('version')
+        cls.published_filename = f'pkg_jtseo_v{cls.published_version}.zip'
+        cls.published_release = (ROOT / 'downloads' / cls.published_filename).read_bytes()
 
     def test_update_metadata_matches_published_artifact(self):
-        expected = hashlib.sha256(self.release).hexdigest()
+        expected = hashlib.sha256(self.published_release).hexdigest()
         self.assertEqual(self.update.findtext('sha256'), expected)
-        self.assertEqual(self.update.findtext('version'), self.version)
+        self.assertEqual(self.update.findtext('version'), self.published_version)
         self.assertEqual(self.update.findtext('element'), 'pkg_jtseo')
         self.assertEqual(self.update.findtext('type'), 'package')
         self.assertEqual(self.update.find('targetplatform').get('version'), '6.*')
         self.assertEqual(self.update.findtext('php_minimum'), '8.3.0')
         self.assertEqual(self.update.findtext('./downloads/downloadurl'),
-                         f'https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v{self.version}/{self.filename}')
+                         f'https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v{self.published_version}/{self.published_filename}')
         checksum, filename = (ROOT / 'downloads/SHA256SUMS.txt').read_text().split()
-        self.assertEqual((checksum, filename), (expected, self.filename))
+        self.assertEqual((checksum, filename), (expected, self.published_filename))
+
+    def test_test_candidate_does_not_publish_update_metadata(self):
+        # An unreleased candidate must not replace the official artifact/feed.
+        if self.version != self.published_version:
+            self.assertEqual(hashlib.sha256(self.published_release).hexdigest(),
+                             '3c83151265975c92d960713031d1c0cd68720e254c2534f50f0df513d687e60d')
+            checksum, filename = (ROOT / 'downloads' / f'SHA256SUMS-{self.version}-test.txt').read_text().split()
+            self.assertEqual((checksum, filename), (hashlib.sha256(self.release).hexdigest(), self.filename))
 
     def test_current_changelog_is_first_and_unique(self):
         changelogs = ET.parse(ROOT / 'updates/changelog.xml').getroot().findall('changelog')
-        self.assertEqual(changelogs[0].findtext('version'), self.version)
-        self.assertEqual(sum(c.findtext('version') == self.version for c in changelogs), 1)
+        self.assertEqual(changelogs[0].findtext('version'), self.published_version)
+        self.assertEqual(sum(c.findtext('version') == self.published_version for c in changelogs), 1)
         self.assertEqual(changelogs[0].findtext('element'), 'pkg_jtseo')
         self.assertTrue(changelogs[0].findall('./fix/item'))
 
@@ -84,7 +95,7 @@ class ReleaseTests(unittest.TestCase):
                     target = path.parent / group.get('folder', '') / item.text.strip()
                     self.assertTrue(target.is_file(), str(target))
 
-    def test_committed_source_matches_published_runtime_payload(self):
+    def test_committed_source_matches_current_tested_runtime_payload(self):
         published = zip_contents(self.release)
         for name, data in published.items():
             if name.startswith('packages/'):
@@ -97,7 +108,7 @@ class ReleaseTests(unittest.TestCase):
             elif name != 'README.md':
                 self.assertEqual((ROOT / 'package' / name).read_bytes(), data, name)
 
-    def test_source_build_preserves_release_code_and_is_reproducible(self):
+    def test_source_build_preserves_tested_code_and_is_reproducible(self):
         with tempfile.TemporaryDirectory() as tmp:
             first = build_package(ROOT, Path(tmp) / 'first').read_bytes()
             second = build_package(ROOT, Path(tmp) / 'second').read_bytes()

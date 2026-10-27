@@ -1,5 +1,11 @@
 # JT SEO Control Center
 
+**Test candidate: 1.0.70** — [Download test ZIP](https://raw.githubusercontent.com/joomtheme/JT-SEO-Control-Center/main/downloads/pkg_jtseo_v1.0.70.zip)
+([validation report](downloads/TEST-REPORT-1.0.70.md)). This candidate adds an
+independent **Include menu items** option, disabled by default. For menu-only
+output, enable it and disable **Include Joomla articles**. **Include homepage**
+remains separate. The official update feed still serves 1.0.69 pending testing.
+
 **Current release: [v1.0.69](https://github.com/joomtheme/JT-SEO-Control-Center/releases/tag/v1.0.69)**
 
 [Download the Joomla installation package](https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v1.0.69/pkg_jtseo_v1.0.69.zip)
@@ -1391,13 +1397,21 @@ python3 -m unittest discover -s tests -v
 python3 tools/build.py
 ```
 
-The build creates `dist/pkg_jtseo_v1.0.69.zip`, including all three child
+The build creates the 1.0.70 test candidate at `dist/pkg_jtseo_v1.0.70.zip`, including all three child
 extensions. Install the generated package through Joomla to test source
 changes. The standard-library checks validate the update feed and release
 checksum, all manifest references, consistent versions, unchanged published
 runtime files and reproducible builds. GitHub Actions also checks PHP syntax
 with PHP 8.3, 8.4 and 8.5. Installed Joomla form checks can be run separately
 with `JTSEO_JOOMLA_ROOT=/path/to/joomla php tests/joomla/compatibility.php`.
+On a **disposable installed Joomla development site**, run
+`JTSEO_JOOMLA_ROOT=/path/to/joomla php tests/joomla/sitemap_menu.php` for menu
+sitemap regression checks. It temporarily creates menu/article fixtures and
+rebuilds the menu tree, then removes its fixtures. Add
+`JTSEO_TEST_ORIGIN=http://127.0.0.1:8080` to also exercise the running site's HTTP
+sitemap endpoint. The test temporarily changes sitemap settings and restores
+them afterwards. Release tests validate candidate source/ZIP fidelity separately
+from the unchanged official release feed and checksum.
 
 The SHA-256 above identifies the published release asset. Source builds
 include the current package README, so their archive checksum can differ

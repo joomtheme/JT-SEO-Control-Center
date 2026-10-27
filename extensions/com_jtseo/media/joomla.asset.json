@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
   "name": "com_jtseo",
-  "version": "1.0.69",
+  "version": "1.0.70",
   "description": "JT SEO Control Center media assets",
   "license": "GPL-2.0-or-later",
   "assets": [
@@ -9,7 +9,7 @@
       "name": "com_jtseo.admin",
       "type": "style",
       "uri": "com_jtseo/admin.css",
-      "version": "1.0.69"
+      "version": "1.0.70"
     },
     {
       "name": "com_jtseo.dashboard",
@@ -21,13 +21,13 @@
       "attributes": {
         "defer": true
       },
-      "version": "1.0.69"
+      "version": "1.0.70"
     },
     {
       "name": "com_jtseo.live-score",
       "type": "style",
       "uri": "com_jtseo/live-score.css",
-      "version": "1.0.69"
+      "version": "1.0.70"
     },
     {
       "name": "com_jtseo.live-score",
@@ -39,7 +39,7 @@
       "attributes": {
         "defer": true
       },
-      "version": "1.0.69"
+      "version": "1.0.70"
     }
   ]
 }

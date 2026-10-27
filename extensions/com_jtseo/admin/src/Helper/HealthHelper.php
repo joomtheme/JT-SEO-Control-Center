@@ -19,7 +19,7 @@ use Joomla\Registry\Registry;
 
 final class HealthHelper
 {
-    public const VERSION = '1.0.69';
+    public const VERSION = '1.0.70';
 
     /**
      * @return array<string, mixed>

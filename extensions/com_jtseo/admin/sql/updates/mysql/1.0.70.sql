@@ -1,0 +1,1 @@
+-- 1.0.70: menu sitemap option; no database structure changes.
