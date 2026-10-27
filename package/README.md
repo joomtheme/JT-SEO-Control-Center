@@ -1,6 +1,7 @@
-# JT SEO Control Center 1.0.70 — test package
+# JT SEO Control Center 1.0.70
 
-Unreleased test package for Joomla 6. The official release remains 1.0.69.
+Stable release for Joomla 6. The official release asset is the unchanged,
+approved test ZIP; this source README reflects its promotion to stable.
 
 To generate only menu destinations, open component Options → Sitemap, enable
 **Include menu items**, disable **Include Joomla articles**, then regenerate

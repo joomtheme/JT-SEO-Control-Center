@@ -48,13 +48,17 @@ class ReleaseTests(unittest.TestCase):
         checksum, filename = (ROOT / 'downloads/SHA256SUMS.txt').read_text().split()
         self.assertEqual((checksum, filename), (expected, self.published_filename))
 
-    def test_test_candidate_does_not_publish_update_metadata(self):
-        # An unreleased candidate must not replace the official artifact/feed.
-        if self.version != self.published_version:
-            self.assertEqual(hashlib.sha256(self.published_release).hexdigest(),
-                             '3c83151265975c92d960713031d1c0cd68720e254c2534f50f0df513d687e60d')
-            checksum, filename = (ROOT / 'downloads' / f'SHA256SUMS-{self.version}-test.txt').read_text().split()
-            self.assertEqual((checksum, filename), (hashlib.sha256(self.release).hexdigest(), self.filename))
+    def test_approved_artifact_and_previous_release_are_preserved(self):
+        previous = (ROOT / 'downloads/pkg_jtseo_v1.0.69.zip').read_bytes()
+        previous_checksum = hashlib.sha256(previous).hexdigest()
+        self.assertEqual(previous_checksum,
+                         '3c83151265975c92d960713031d1c0cd68720e254c2534f50f0df513d687e60d')
+        self.assertEqual((ROOT / 'downloads/SHA256SUMS-1.0.69.txt').read_text().split(),
+                         [previous_checksum, 'pkg_jtseo_v1.0.69.zip'])
+        self.assertEqual(hashlib.sha256(self.release).hexdigest(),
+                         '3d2442be79182924993fa599768662a918b212c15aeb007dfbe8edc2eea61391')
+        self.assertEqual(self.version, self.published_version)
+        self.assertEqual(self.update.findtext('./tags/tag'), 'stable')
 
     def test_current_changelog_is_first_and_unique(self):
         changelogs = ET.parse(ROOT / 'updates/changelog.xml').getroot().findall('changelog')

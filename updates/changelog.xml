@@ -3,6 +3,28 @@
     <changelog>
         <element>pkg_jtseo</element>
         <type>package</type>
+        <version>1.0.70</version>
+        <addition>
+            <item>Added an independent Include menu items sitemap option, disabled by default, for published publicly accessible internal menu destinations.</item>
+        </addition>
+        <change>
+            <item>Generate menu-only sitemaps by enabling Include menu items and disabling Include Joomla articles. Include homepage remains independent.</item>
+            <item>Preserved Joomla routing, multilingual sitemap buckets, noindex filtering, URL inclusion/exclusion priority and shared URL deduplication.</item>
+            <item>Menu-linked articles retain article publication, guest/category access, canonical validity and noindex eligibility checks.</item>
+        </change>
+        <fix>
+            <item>Fixed the lack of an independent menu sitemap source when Joomla article enumeration is disabled, addressing Peter's request in issue #6.</item>
+        </fix>
+        <note>
+            <item>Installation and upgrades from 1.0.69 validated on Joomla 6.0.0 and 6.2.0 with PHP 8.4.24, including 68 compatibility checks and 40 sitemap checks with HTTP validation.</item>
+            <item>JED Checker and real-site checks passed as confirmed by the maintainer. Peter confirmed the menu-only sitemap meets his requirements.</item>
+            <item>Promoted the exact tested ZIP to stable without changing the artifact. The published 1.0.69 ZIP is preserved.</item>
+        </note>
+    </changelog>
+
+    <changelog>
+        <element>pkg_jtseo</element>
+        <type>package</type>
         <version>1.0.69</version>
 
         <addition>

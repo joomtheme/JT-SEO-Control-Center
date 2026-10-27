@@ -1,6 +1,7 @@
-# JT SEO Control Center 1.0.70 test candidate
+# JT SEO Control Center 1.0.70 stable
 
-Tested on 2026-10-27. Not an official release; awaiting JED Checker and real-site testing.
+Tested and promoted to stable on 2026-10-27. The maintainer confirmed JED Checker
+and real-site checks passed. Peter confirmed the menu-only feature works as required.
 
 ## Change
 
@@ -59,13 +60,14 @@ JTSEO_JOOMLA_ROOT=/path/to/disposable/installed/joomla JTSEO_TEST_ORIGIN=http://
 The integration test creates temporary menus/articles and rebuilds the menu tree;
 use a disposable test site only. Its fixtures and temporary settings are removed
 or restored after each run. EN/TR bucket checks use published content-language
-records; full production multilingual plugin/language-pack configurations remain
-part of real-site acceptance testing. JED Checker and PHP 8.3/8.5 were not run in
-this cloud instance (the existing GitHub Actions PHP matrix remains configured).
+records. The maintainer confirmed real-site acceptance testing passed; the
+automated bucket checks do not independently prove every production multilingual
+plugin/language-pack configuration. JED Checker passed as reported by the
+maintainer; it and PHP 8.3/8.5 were not run in this cloud instance (the existing GitHub Actions PHP matrix remains configured).
 
 ## Artifact and publication boundary
 
-Test ZIP: `downloads/pkg_jtseo_v1.0.70.zip`
+Approved stable ZIP: `downloads/pkg_jtseo_v1.0.70.zip`
 
 SHA-256:
 `3d2442be79182924993fa599768662a918b212c15aeb007dfbe8edc2eea61391`
@@ -73,6 +75,12 @@ SHA-256:
 The exact ZIP above was installed and tested. A separate
 `SHA256SUMS-1.0.70-test.txt` identifies it. Source/package versions are 1.0.70.
 
-The official `downloads/pkg_jtseo_v1.0.69.zip`, `downloads/SHA256SUMS.txt`,
-`updates/update.xml` and `updates/changelog.xml` remain unchanged. No GitHub
-release or release tag was created. The official release remains **1.0.69**.
+The official release asset uses this exact ZIP and checksum:
+https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v1.0.70/pkg_jtseo_v1.0.70.zip
+
+The release asset was downloaded and its SHA-256 independently verified before
+updating the feed. Its original test-candidate README is retained to preserve the
+approved bytes; the source README now describes stable status. Runtime code is
+identical. `SHA256SUMS.txt`, `updates/update.xml` and `updates/changelog.xml` now
+identify 1.0.70 stable. The 1.0.69 ZIP remains unchanged, with its checksum archived
+in `SHA256SUMS-1.0.69.txt`. The original candidate checksum file remains for history.

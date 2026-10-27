@@ -1,30 +1,28 @@
 # JT SEO Control Center
 
-**Test candidate: 1.0.70** — [Download test ZIP](https://raw.githubusercontent.com/joomtheme/JT-SEO-Control-Center/main/downloads/pkg_jtseo_v1.0.70.zip)
-([validation report](downloads/TEST-REPORT-1.0.70.md)). This candidate adds an
-independent **Include menu items** option, disabled by default. For menu-only
-output, enable it and disable **Include Joomla articles**. **Include homepage**
-remains separate. The official update feed still serves 1.0.69 pending testing.
+**Current release: [v1.0.70](https://github.com/joomtheme/JT-SEO-Control-Center/releases/tag/v1.0.70)**
 
-**Current release: [v1.0.69](https://github.com/joomtheme/JT-SEO-Control-Center/releases/tag/v1.0.69)**
-
-[Download the Joomla installation package](https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v1.0.69/pkg_jtseo_v1.0.69.zip)
+[Download the Joomla installation package](https://github.com/joomtheme/JT-SEO-Control-Center/releases/download/v1.0.70/pkg_jtseo_v1.0.70.zip)
 · [Visual walkthrough](docs/demo/README.md)
 · [Changelog](updates/changelog.xml)
 
 ## Current Release
 
-Version **1.0.69** restores the JT SEO fields in Joomla article editing and
-corrects the JavaScript/CSS paths used by the dashboard and live SEO score.
-It enables the required plugins on new installations while preserving
-administrator-selected plugin states during upgrades.
+Version **1.0.70** adds an independent **Include menu items** sitemap option,
+disabled by default. For menu-only output, enable it and disable **Include Joomla
+articles**. **Include homepage** remains separate. Published, publicly accessible
+internal menu destinations follow Joomla routing and existing language, noindex,
+URL inclusion/exclusion and deduplication rules.
 
-The package passed JED Checker and was tested with Joomla 6.2.0 / PHP 8.4.27,
-including installation, upgrades, article SEO saving, frontend metadata and
-`noindex` sitemap filtering. See the [validation report](downloads/TEST-REPORT.md).
+Installation and upgrades from 1.0.69 were validated on Joomla 6.0.0 and 6.2.0
+with PHP 8.4.24. JED Checker and real-site testing passed, and Peter confirmed
+that menu-only output meets his requirements. See the
+[validation report](downloads/TEST-REPORT-1.0.70.md).
+
+The stable release uses the exact tested ZIP. The 1.0.69 release ZIP is preserved.
 
 ```text
-SHA-256: 3c83151265975c92d960713031d1c0cd68720e254c2534f50f0df513d687e60d
+SHA-256: 3d2442be79182924993fa599768662a918b212c15aeb007dfbe8edc2eea61391
 ```
 
 **JT SEO Control Center** is a Joomla SEO management package for Joomla
@@ -111,7 +109,7 @@ JT SEO Control Center is distributed as a Joomla package extension.
 Install this file through Joomla:
 
 ``` text
-pkg_jtseo_v1.0.69.zip
+pkg_jtseo_v1.0.70.zip
 ```
 
 The package installs the following child extensions:
@@ -388,6 +386,7 @@ JT SEO Control Center can generate XML sitemaps for Joomla sites.
 Sitemap features:
 
 -   Include homepage
+-   Independent menu-item inclusion (default off) for menu-only sitemaps
 -   Include published Joomla articles
 -   Exclude articles marked as noindex
 -   Exclude Joomla menu paths marked as noindex, including child URLs
@@ -438,7 +437,7 @@ may fail. The dashboard system status will warn about this.
 
 Chrome may display an XSLT deprecation notice when opening a sitemap. The
 stylesheet controls browser presentation; the sitemap XML remains available
-for search engines. Version 1.0.69 still uses XSLT for the browser table.
+for search engines. Version 1.0.70 still uses XSLT for the browser table.
 
 ### Multilingual Sitemap Support
 
@@ -477,15 +476,17 @@ configured maximum links per sitemap file, for example:
 /sitemap.en-GB.2.xml
 ```
 
-Each language sitemap is generated from published Joomla articles
-assigned to the matching content language.
+Each language sitemap uses the enabled sources: published Joomla articles
+and/or public internal menu destinations assigned to the matching content
+language, together with eligible all-language entries. Menu-only output does
+not require article enumeration.
 
 Recommended Joomla multilingual setup:
 
 -   Enable the Joomla Language Filter plugin.
 -   Publish the required content languages.
 -   Assign a home menu item for each site language.
--   Assign articles to the correct content language.
+-   Assign articles and menu items to the correct content language.
 -   Generate the sitemap from JT SEO Control Center.
 
 ------------------------------------------------------------------------
@@ -763,7 +764,7 @@ dashboard displays a warning.
 3.  Upload the package ZIP file:
 
 ``` text
-pkg_jtseo_v1.0.69.zip
+pkg_jtseo_v1.0.70.zip
 ```
 
 4.  Wait for Joomla to complete the package installation.
@@ -1002,6 +1003,8 @@ Recommended redirect workflow:
   Enable XML sitemap          Enables sitemap output
 
   Include homepage            Adds homepage to sitemap
+
+  Include menu items          Adds public internal menu destinations (default off)
 
   Include Joomla articles     Adds published articles
 
@@ -1397,7 +1400,7 @@ python3 -m unittest discover -s tests -v
 python3 tools/build.py
 ```
 
-The build creates the 1.0.70 test candidate at `dist/pkg_jtseo_v1.0.70.zip`, including all three child
+The build creates a 1.0.70 source package at `dist/pkg_jtseo_v1.0.70.zip`, including all three child
 extensions. Install the generated package through Joomla to test source
 changes. The standard-library checks validate the update feed and release
 checksum, all manifest references, consistent versions, unchanged published
@@ -1410,8 +1413,10 @@ sitemap regression checks. It temporarily creates menu/article fixtures and
 rebuilds the menu tree, then removes its fixtures. Add
 `JTSEO_TEST_ORIGIN=http://127.0.0.1:8080` to also exercise the running site's HTTP
 sitemap endpoint. The test temporarily changes sitemap settings and restores
-them afterwards. Release tests validate candidate source/ZIP fidelity separately
-from the unchanged official release feed and checksum.
+them afterwards. Release tests validate source/ZIP runtime fidelity, the official release feed and
+checksum, and preservation of the historical 1.0.69 artifact. The stable ZIP
+retains its original test-candidate README so its approved checksum stays unchanged;
+a source build includes the current stable README but identical extension code.
 
 The SHA-256 above identifies the published release asset. Source builds
 include the current package README, so their archive checksum can differ

@@ -3,7 +3,18 @@
 JT SEO Control Center declares PHP 8.3 or later. PHP 8.4 and 8.5 users should
 not be required to downgrade as the resolution of a compatibility defect.
 
-## Functional checks performed
+## 1.0.70 stable validation
+
+The unchanged approved 1.0.70 ZIP passed installation/upgrade checks on Joomla
+6.0.0 and 6.2.0 with PHP 8.4.24 and MariaDB 11.8.6. Each version passed 68
+compatibility assertions and 40 sitemap checks including HTTP endpoint tests.
+The maintainer confirmed JED Checker and real-site testing passed, and Peter
+confirmed menu-only output works as required. See the
+[1.0.70 validation report](../downloads/TEST-REPORT-1.0.70.md).
+PHP 8.3/8.5 functional tests were not repeated for 1.0.70 in this cloud instance;
+the historical observations below apply to 1.0.69.
+
+## Historical 1.0.69 functional checks
 
 The published v1.0.69 package was exercised on these local installations:
 
